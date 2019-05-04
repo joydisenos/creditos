@@ -46,7 +46,7 @@
 
       <div class="logo float-left">
         <!-- Uncomment below if you prefer to use an image logo -->
-         <h1 class="text-light"><a href="#intro" class="scrollto"><span>Créditos Online</span></a></h1> 
+         <h1 class="text-light"><a href="#intro" class="scrollto"><span>Créditos</span></a></h1> 
         <!-- <a href="#intro" class="scrollto"><img src="img/logo.png" alt="" class="img-fluid"></a> -->
       </div>
 

@@ -7,7 +7,7 @@
     <div class="container">
 
       <div class="intro-img">
-        <img src="img/intro-img.svg" alt="" class="img-fluid animated pulse infinite slower">
+        <img src="img/intro-img.svg" alt="" class="img-fluid animated pulse infinite slower d-none">
       </div>
 
       <div class="intro-info">
