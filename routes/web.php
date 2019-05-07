@@ -18,3 +18,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//Modulos Administrativos
+
+	//Usuarios
+	Route::prefix('usuario')->group( function () {
+		Route::get('/', 'UsuarioController@index')->name('usuario.index');
+	});
