@@ -7,11 +7,17 @@
     <div class="container">
 
       <div class="intro-img">
-        <img src="img/intro-img.svg" alt="" class="img-fluid animated pulse infinite slower d-none">
+        <img src="{{ asset('img/intro-img.svg')}}" alt="" class="img-fluid animated pulse infinite slower d-none">
       </div>
 
       <div class="intro-info">
-        <h2>Soluciones<br><span>Online</span><br>Oportunidades</h2>
+        
+          <img src="{{ asset('img/logo-negro.png') }}" alt="Logo CloudBank" class="img-fluid" style="max-width: 200px">
+        
+        <h2>
+          Soluciones <br>
+          <span>Online</span><br>
+          Oportunidades</h2>
         <div>
           <a href="#about" class="btn-get-started scrollto">Comienza</a>
           <a href="#services" class="btn-services scrollto">Servicios</a>
