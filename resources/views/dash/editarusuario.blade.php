@@ -1,13 +1,5 @@
 @extends('master.dash')
 
-@section('header')
-<style>
-  .detallado{
-    display: none;
-  }
-</style>
-@endsection
-
 @section('content')
 <!-- Header -->
             <div class="header mt-md-5">
@@ -22,51 +14,20 @@
 
                     <!-- Title -->
                     <h1 class="header-title">
-                      Crear Usuario
+                      Modificar Usuario {{ title_case($user->primer_nombre) }} {{ title_case($user->primer_apellido) }}
                     </h1>
 
                   </div>
                 </div> <!-- / .row -->
 
-                <!-- Nav -->
-
-                <!--
-                <div class="row align-items-center">
-                  <div class="col">
-                    
-                    <ul class="nav nav-tabs nav-overflow header-tabs">
-                      <li class="nav-item">
-                        <a href="#!" class="nav-link active">
-                          General
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="#!" class="nav-link">
-                          Profile
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="#!" class="nav-link">
-                          Billing
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="#!" class="nav-link">
-                          Notifications
-                        </a>
-                      </li>
-                    </ul>
-
-                  </div>
-                </div>
-            -->
+            
               </div>
             </div>
 
             @include('includes.errors')
 
             <!-- Form -->
-            <form class="mb-4" action="{{ route('admin.crear.nuevo.usuario') }}" method="post">
+            <form class="mb-4" action="{{ route('admin.actualizar.usuario' , [$user->id]) }}" method="post">
             	@csrf
 
               <div class="row">
@@ -81,7 +42,7 @@
                     </label>
 
                     <!-- Input -->
-                    <input type="text" class="form-control @error('primer_nombre') is-invalid @enderror" name="primer_nombre" required>
+                    <input type="text" class="form-control @error('primer_nombre') is-invalid @enderror" name="primer_nombre" value="{{ $user->primer_nombre }}" required>
 
                   </div>
 
@@ -97,7 +58,7 @@
                     </label>
 
                     <!-- Input -->
-                    <input type="text" class="form-control @error('segundo_nombre') is-invalid @enderror" name="segundo_nombre">
+                    <input type="text" class="form-control @error('segundo_nombre') is-invalid @enderror" name="segundo_nombre" value="{{ $user->segundo_nombre }}">
 
                   </div>
 
@@ -114,7 +75,7 @@
                     </label>
 
                     <!-- Input -->
-                    <input type="text" class="form-control @error('primer_apellido') is-invalid @enderror" name="primer_apellido" required>
+                    <input type="text" class="form-control @error('primer_apellido') is-invalid @enderror" name="primer_apellido" value="{{ $user->primer_apellido }}" required>
 
                   </div>
 
@@ -130,7 +91,7 @@
                     </label>
 
                     <!-- Input -->
-                    <input type="text" class="form-control @error('segundo_apellido') is-invalid @enderror" name="segundo_apellido">
+                    <input type="text" class="form-control @error('segundo_apellido') is-invalid @enderror" name="segundo_apellido" value="{{ $user->segundo_apellido }}">
 
                   </div>
 
@@ -148,7 +109,7 @@
 
 
                     <!-- Input -->
-                    <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" required>
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" disabled>
 
                   </div>
 
@@ -168,12 +129,12 @@
                     	<div class="col-4">
                     	<select name="tipo_documento" class="form-control @error('tipo_documento') is-invalid @enderror" required>
                     		<option value="">Seleccione</option>
-                    		<option value="1">DNI</option>
-                    		<option value="2">Pasaporte</option>
+                    		<option value="1" @if($user->tipo_documento == 1) selected @endif>DNI</option>
+                    		<option value="2" @if($user->tipo_documento == 2) selected @endif>Pasaporte</option>
                     	</select>
 	                    </div>
 	                    <div class="col">
-	                    	<input type="text" class="form-control @error('numero_documento') is-invalid @enderror" name="numero_documento" placeholder="Número" required>
+	                    	<input type="text" class="form-control @error('numero_documento') is-invalid @enderror" name="numero_documento" placeholder="Número" value="{{ $user->numero_documento }}" required>
 	                    </div>
                     </div>
 
@@ -191,7 +152,7 @@
                     </label>
 
                     <!-- Input -->
-                    <input type="text" class="form-control mb-3" name="telefono_celular">
+                    <input type="text" class="form-control mb-3" name="telefono_celular" value="{{ $user->telefono_celular }}">
 
                   </div>
 
@@ -207,7 +168,7 @@
                     </label>
 
                     <!-- Input -->
-                    <input type="text" class="form-control" name="fecha_nacimiento">
+                    <input type="text" class="form-control" name="fecha_nacimiento" value="{{ $user->fecha_nacimiento }}">
 
                   </div>
 
@@ -247,31 +208,7 @@
                     </div> <!-- / .row -->
                   </div>
 
-                   <div class="form-group">
-
-                    <!-- Label -->
-                    <label class="mb-1">
-                      Perfil Detallado
-                    </label>
-
-                    <!-- Form text -->
-                    <small class="form-text text-muted">
-                      Completar recaudos del usuario
-                    </small>
-
-                    <div class="row">
-                      <div class="col-auto">
-                        
-                        <!-- Toggle -->
-                        <div class="custom-control custom-checkbox-toggle">
-                          <input type="checkbox" class="custom-control-input" id="recaudos">
-                          <label class="custom-control-label" for="recaudos"></label>
-                        </div>
-
-                      </div>
-                      
-                    </div> <!-- / .row -->
-                  </div>
+                
 
                 </div>
                 <div class="col-12 col-md-6">
@@ -281,27 +218,13 @@
 
                     <!-- Label -->
                     <label>
-                      Contraseña <span class="text-danger">*</span>
+                      Nueva Contraseña
                     </label>
 
                     <!-- Input -->
-                    <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" required>
+                    <input type="password" class="form-control @error('password') is-invalid @enderror" name="password">
 
                   </div>
-
-                  <!-- New password -->
-                  <div class="form-group">
-
-                    <!-- Label -->
-                    <label>
-                      Confirme su contraseña <span class="text-danger">*</span>
-                    </label>
-
-                    <!-- Input -->
-                    <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" required>
-
-                  </div>
-
                  
 
                 </div>
@@ -324,8 +247,8 @@
                           </label>
 
                           <select name="genero" class="form-control">
-                            <option value="1">Masculino</option>
-                            <option value="2">Femenino</option>
+                            <option value="1" @if($user->genero == 1) selected @endif>Masculino</option>
+                            <option value="2" @if($user->genero == 2) selected @endif>Femenino</option>
                           </select>
 
                         </div>
@@ -342,7 +265,7 @@
                             </label>
 
                             <!-- Input -->
-                            <input type="text" class="form-control mb-3" name="telefono_fijo">
+                            <input type="text" class="form-control mb-3" name="telefono_fijo" value="{{ $user->telefono_fijo }}">
 
                           </div>
 
@@ -370,7 +293,7 @@
                             </label>
 
                             <!-- Input -->
-                            <input type="text" data-toggle="flatpickr" class="form-control mb-3" name="expedicion">
+                            <input type="text" data-toggle="flatpickr" class="form-control mb-3" name="expedicion" value="{{ $user->expedicion }}">
 
                           </div>
                       </div>
@@ -389,7 +312,7 @@
                             Departamento
                           </label>
 
-                         <input type="text" name="departamento" class="form-control">
+                         <input type="text" name="departamento" class="form-control" value="{{ $user->departamento }}">
 
                         </div>
                   </div>
@@ -402,7 +325,7 @@
                             Ciudad
                           </label>
 
-                         <input type="text" name="ciudad" class="form-control">
+                         <input type="text" name="ciudad" class="form-control" value="{{ $user->ciudad }}">
 
                         </div>
                   </div>
@@ -415,7 +338,7 @@
                             Barrio
                           </label>
 
-                         <input type="text" name="barrio" class="form-control">
+                         <input type="text" name="barrio" class="form-control" value="{{ $user->barrio }}">
 
                         </div>
                   </div>
@@ -428,7 +351,7 @@
                             Dirección
                           </label>
 
-                         <input type="text" name="direccion" class="form-control">
+                         <input type="text" name="direccion" class="form-control" value="{{ $user->direccion }}">
 
                         </div>
                   </div>
@@ -449,10 +372,10 @@
                           </label>
 
                          <select name="estado_civil" class="form-control">
-                           <option value="1">Soltero</option>
-                           <option value="2">Casado</option>
-                           <option value="3">Divorciado</option>
-                           <option value="4">Viudo</option>
+                           <option value="1" @if($user->estado_civil == 1) selected @endif>Soltero</option>
+                           <option value="2" @if($user->estado_civil == 2) selected @endif>Casado</option>
+                           <option value="3" @if($user->estado_civil == 3) selected @endif>Divorciado</option>
+                           <option value="4" @if($user->estado_civil == 4) selected @endif>Viudo</option>
                          </select>
 
                         </div>
@@ -466,7 +389,7 @@
                             Personas a Cargo
                           </label>
 
-                         <input type="number" name="personas_cargo" class="form-control">
+                         <input type="number" name="personas_cargo" class="form-control" value="{{ $user->personas_cargo }}">
 
                         </div>
                   </div>
@@ -480,8 +403,8 @@
                           </label>
 
                          <select name="tipo_vivienda" class="form-control">
-                           <option value="1">Propia</option>
-                           <option value="2">Arrendamiento</option>
+                           <option value="1" @if( $user->tipo_vivienda == 1 ) selected @endif>Propia</option>
+                           <option value="2" @if( $user->tipo_vivienda == 2 ) selected @endif>Arrendamiento</option>
                          </select>
 
                         </div>
@@ -512,28 +435,11 @@
 
                   <!-- Submit -->
                   <button type="submit" class="btn btn-primary">
-                    Crear
+                    Actualizar
                   </button>
                   
                 </div>
               </div> <!-- / .row -->
 
             </form>
-@endsection
-
-@section('scripts')
-<script>
-  $(document).ready(function(){
-
-    $('#recaudos').change(function(){
-        if($(this).prop('checked'))
-        {
-          $('.detallado').show();
-        }else{
-          $('.detallado').hide();
-        }
-
-    });
-  });
-</script>
 @endsection

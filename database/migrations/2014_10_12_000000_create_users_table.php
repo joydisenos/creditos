@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->date('fecha_nacimiento')->nullable();
             $table->integer('genero')->nullable();
             $table->integer('estado_civil')->nullable();
+            $table->string('foto')->nullable();
 
             $table->integer('personas_cargo')->nullable();
             $table->integer('tipo_vivienda')->nullable();

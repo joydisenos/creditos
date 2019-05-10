@@ -147,8 +147,8 @@
                             <i class="fe fe-more-vertical"></i>
                           </a>
                           <div class="dropdown-menu dropdown-menu-right">
-                            <a href="#!" class="dropdown-item">
-                              Detalles
+                            <a href="{{ route('admin.modificar.usuario' , [$user->id]) }}" class="dropdown-item">
+                              Modificar
                             </a>
                             <a href="#!" class="dropdown-item">
                               Crear Crédito

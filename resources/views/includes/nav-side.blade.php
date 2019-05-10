@@ -85,11 +85,25 @@
                 </a>
               </li>
 
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.usuarios') }}" role="button">
+                  <i class="fe fe-book-open"></i> Créditos
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.usuarios') }}" role="button">
+                  <i class="fe fe-mail"></i> Mensajes
+                </a>
+              </li>
+
               <li class="nav-item d-md-none">
                 <a class="nav-link" href="#sidebarModalActivity" data-toggle="modal">
                  <span class="fe fe-bell"></span> Notificaciones
                 </a>
               </li>
+
+
             </ul>
 
         
