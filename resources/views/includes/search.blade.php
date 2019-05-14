@@ -19,7 +19,7 @@
             <!-- List group -->
             <div class="my--3">
               <div class="list-group list-group-flush list">
-                <a href="team-overview.html" class="list-group-item px-0">
+                <a href="#" class="list-group-item px-0">
                   <div class="row align-items-center">
                     <div class="col-auto">
                   
@@ -44,7 +44,7 @@
                     </div>
                   </div> <!-- / .row -->
                 </a>
-                <a href="team-overview.html" class="list-group-item px-0">
+                <a href="#" class="list-group-item px-0">
                   <div class="row align-items-center">
                     <div class="col-auto">
                   
@@ -69,7 +69,7 @@
                     </div>
                   </div> <!-- / .row -->
                 </a>
-                <a href="project-overview.html" class="list-group-item px-0">
+                <a href="#" class="list-group-item px-0">
 
                   <div class="row align-items-center">
                     <div class="col-auto">
@@ -96,7 +96,7 @@
                   </div> <!-- / .row -->
 
                 </a>
-                <a href="project-overview.html" class="list-group-item px-0">
+                <a href="#" class="list-group-item px-0">
 
                   <div class="row align-items-center">
                     <div class="col-auto">
@@ -123,7 +123,7 @@
                   </div> <!-- / .row -->
 
                 </a>
-                <a href="project-overview.html" class="list-group-item px-0">
+                <a href="#" class="list-group-item px-0">
 
                   <div class="row align-items-center">
                     <div class="col-auto">
@@ -150,7 +150,7 @@
                   </div> <!-- / .row -->
             
                 </a>
-                <a href="profile-posts.html" class="list-group-item px-0">
+                <a href="#" class="list-group-item px-0">
             
                   <div class="row align-items-center">
                     <div class="col-auto">
@@ -177,7 +177,7 @@
                   </div> <!-- / .row -->
 
                 </a>
-                <a href="profile-posts.html" class="list-group-item px-0">
+                <a href="#" class="list-group-item px-0">
 
                   <div class="row align-items-center">
                     <div class="col-auto">

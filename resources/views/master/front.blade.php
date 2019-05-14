@@ -57,15 +57,26 @@
           <li><a href="#team">Equipo</a></li>
           <li><a href="#contact">Contacto</a></li>
 
-          <li class="drop-down"><a href="">Bienvenido, {usuario}</a>
+          @guest
+          <li><a href="{{ route('login') }}">Iniciar Sesión</a></li>
+          @else
+          <li class="drop-down"><a href="">Bienvenido <strong>{{ title_case(Auth::user()->primer_nombre) }}</strong></a>
             <ul>
               <li><a href="{{ route('admin.dashboard') }}">Admin</a></li>
+              <li><a href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();"
+                  >Salir</a></li>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                  </form>
               <!--<li><a href="#">Datos</a></li>
               <li><a href="#">Historial</a></li>
               <li><a href="#">Mensajes</a></li>
               <li><a href="#">Cerrar Sesión</a></li>-->
             </ul>
           </li>
+          @endguest
         </ul>
       </nav><!-- .main-nav -->
       

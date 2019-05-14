@@ -27,10 +27,12 @@
 
               <!-- Menu -->
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="sidebarIcon">
-                <a href="profile-posts.html" class="dropdown-item">Profile</a>
-                <a href="settings.html" class="dropdown-item">Settings</a>
+                <a href="#" class="dropdown-item">Configuración</a>
                 <hr class="dropdown-divider">
-                <a href="sign-in.html" class="dropdown-item">Logout</a>
+                <a href="{{ route('logout') }}" class="dropdown-item"
+                        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();"
+                    >Salir</a>
               </div>
 
             </div>
@@ -86,13 +88,13 @@
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.usuarios') }}" role="button">
+                <a class="nav-link" href="{{ route('admin.creditos') }}" role="button">
                   <i class="fe fe-book-open"></i> Créditos
                 </a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.usuarios') }}" role="button">
+                <a class="nav-link" href="{{ route('admin.enviar.mensaje') }}" role="button">
                   <i class="fe fe-mail"></i> Mensajes
                 </a>
               </li>
@@ -137,10 +139,13 @@
 
                 <!-- Menu -->
                 <div class="dropdown-menu" aria-labelledby="sidebarIconCopy">
-                  <a href="profile-posts.html" class="dropdown-item">Profile</a>
-                  <a href="settings.html" class="dropdown-item">Settings</a>
+                  <a href="#" class="dropdown-item">Configuración</a>
                   <hr class="dropdown-divider">
-                  <a href="sign-in.html" class="dropdown-item">Logout</a>
+                  <a href="{{ route('logout') }}" class="dropdown-item"
+                        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();"
+                    >Salir</a>
+                    
                 </div>
 
               </div>
@@ -159,3 +164,7 @@
 
         </div>
       </nav>
+
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          @csrf
+    </form>

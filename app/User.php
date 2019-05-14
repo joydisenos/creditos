@@ -22,6 +22,7 @@ class User extends Authenticatable
         'segundo_nombre',
         'primer_apellido',
         'segundo_apellido',
+        'foto',
         'tipo_documento',
         'numero_documento',
         'expedicion',
@@ -62,5 +63,15 @@ class User extends Authenticatable
     public function usuarios()
     {
         return $this->all();
+    }
+
+    public function creditos()
+    {
+        return $this->hasMany(Credito::class , 'user_id');
+    }
+
+    public function mensajes()
+    {
+        return $this->hasMany(Mensaje::class , 'user_id');
     }
 }
