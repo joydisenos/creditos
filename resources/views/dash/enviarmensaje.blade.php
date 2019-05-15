@@ -34,7 +34,7 @@
             @include('includes.errors')
 
             <!-- Form -->
-            <form class="mb-4" action="#" method="post">
+            <form class="mb-4" action="{{ route('admin.enviar.nuevo.mensaje') }}" method="post">
             	@csrf
               
               <input type="hidden" name="cuotas_array" id="array">

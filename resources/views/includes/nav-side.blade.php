@@ -53,6 +53,15 @@
                 </div>
               </div>
             </form>
+
+            <!-- Divider -->
+            <hr class="navbar-divider my-3">
+
+            <!-- Heading -->
+            <h6 class="navbar-heading">
+              Panel Administrativo
+            </h6>
+
       
             <!-- Navigation -->
             <ul class="navbar-nav">
@@ -75,6 +84,8 @@
                   </ul>
                 </div>
               </li>-->
+
+
               <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.dashboard') }}" role="button">
                   <i class="fe fe-activity"></i> Dashboard
@@ -96,6 +107,37 @@
               <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.enviar.mensaje') }}" role="button">
                   <i class="fe fe-mail"></i> Mensajes
+                </a>
+              </li>
+
+            </ul>
+
+            <!-- Divider -->
+            <hr class="navbar-divider my-3">
+
+            <!-- Heading -->
+            <h6 class="navbar-heading">
+              Panel de Usuario
+            </h6>
+
+
+            <ul class="navbar-nav">
+
+              <!--<li class="nav-item">
+                <a class="nav-link" href="{{ route('usuario.index') }}" role="button">
+                  <i class="fe fe-activity"></i> Inicio
+                </a>
+              </li>-->
+
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('usuario.creditos') }}" role="button">
+                  <i class="fe fe-activity"></i> Créditos
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('usuario.mensajes') }}" role="button">
+                  <i class="fe fe-activity"></i> Mensajes
                 </a>
               </li>
 

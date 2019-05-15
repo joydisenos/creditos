@@ -20,6 +20,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 	//Usuarios
 	Route::prefix('usuario')->group( function () {
 		Route::get('/', 'UsuarioController@index')->name('usuario.index');
+		Route::get('/creditos', 'UsuarioController@creditos')->name('usuario.creditos');
+		Route::get('/ver/credito/{id}', 'UsuarioController@verCredito')->name('usuario.ver.credito');
+		
+		Route::get('/mensajes', 'UsuarioController@mensajes')->name('usuario.mensajes');
 	});
 
 	//Admin
@@ -39,5 +43,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 		Route::get('/ver/credito/{id}', 'AdminController@verCredito')->name('admin.ver.credito');
 
 		Route::get('/enviar/mensaje', 'AdminController@enviarMensaje')->name('admin.enviar.mensaje');
+		Route::post('/enviar/nuevo/mensaje', 'AdminController@enviarNuevoMensaje')->name('admin.enviar.nuevo.mensaje');
 	
 	});

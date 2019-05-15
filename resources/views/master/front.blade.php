@@ -60,9 +60,20 @@
           @guest
           <li><a href="{{ route('login') }}">Iniciar Sesión</a></li>
           @else
-          <li class="drop-down"><a href="">Bienvenido <strong>{{ title_case(Auth::user()->primer_nombre) }}</strong></a>
+          <li class="drop-down"><a href="">Bienvenido <strong>{{ title_case(Auth::user()->primer_nombre) }}</strong>
+                @if(Auth::user()->mensajesNoLeidos()->count() > 0)
+                <span class="badge badge-pill badge-warning p-1">{{ Auth::user()->mensajesNoLeidos()->count() }}</span>
+                @endif
+              </a>
             <ul>
               <li><a href="{{ route('admin.dashboard') }}">Admin</a></li>
+              <li><a href="{{ route('usuario.creditos') }}">Créditos</a></li>
+              <li><a href="{{ route('usuario.mensajes') }}">Mensajes 
+                @if(Auth::user()->mensajesNoLeidos()->count() > 0)
+                <span class="badge badge-pill badge-warning p-1">{{ Auth::user()->mensajesNoLeidos()->count() }}</span>
+                @endif
+              </a>
+              </li>
               <li><a href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();"

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Credito;
 use App\Cuota;
+use App\Mensaje;
 
 class AdminController extends Controller
 {
@@ -147,5 +148,20 @@ class AdminController extends Controller
         $users = $userRef->usuarios();
 
         return view('dash.enviarmensaje' , compact('users'));
+    }
+
+    public function enviarNuevoMensaje(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required',
+            'asunto' => 'required',
+            'mensaje' => 'required'
+        ]);
+
+        $data = $request->all();
+
+        $mensaje = Mensaje::create($data);
+
+        return redirect()->back()->with('status' , 'Mensaje enviado!');
     }
 }

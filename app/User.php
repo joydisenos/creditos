@@ -74,4 +74,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Mensaje::class , 'user_id');
     }
+
+    public function mensajesNoLeidos()
+    {
+        return Mensaje::where('user_id' , $this->id)->where('leido' , 0)->get();
+    }
 }
