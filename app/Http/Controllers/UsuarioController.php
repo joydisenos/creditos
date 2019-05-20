@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Credito;
+use App\Mensaje;
 
 class UsuarioController extends Controller
 {
@@ -41,5 +42,14 @@ class UsuarioController extends Controller
     	$mensajes = Auth::user()->mensajes;
 
     	return view('dash.mensajes' , compact('mensajes'));
+    }
+
+    public function verMensaje($id)
+    {
+        $mensaje = Mensaje::findOrFail($id);
+        $mensaje->leido = 1;
+        $mensaje->save();
+
+        return view('dash.vermensaje' , compact('mensaje'));
     }
 }

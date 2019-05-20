@@ -31,6 +31,7 @@ class CreateUsersTable extends Migration
 
             $table->integer('personas_cargo')->nullable();
             $table->integer('tipo_vivienda')->nullable();
+            $table->float('limite_credito')->nullable();
 
             $table->string('telefono_fijo')->nullable();
             $table->string('telefono_celular')->nullable();
@@ -40,6 +41,9 @@ class CreateUsersTable extends Migration
             $table->string('ciudad')->nullable();
             $table->string('barrio')->nullable();
             $table->string('direccion')->nullable();
+
+            $table->integer('registro_id')->nullable();
+            $table->integer('validado_id')->nullable();
 
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

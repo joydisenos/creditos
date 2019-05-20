@@ -150,9 +150,6 @@
                             <a href="{{ route('admin.modificar.usuario' , [$user->id]) }}" class="dropdown-item">
                               Modificar
                             </a>
-                            <a href="#!" class="dropdown-item">
-                              Crear Crédito
-                            </a>
                           </div>
                         </div>
                       </td>

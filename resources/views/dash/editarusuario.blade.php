@@ -424,7 +424,42 @@
                   </div>
                 </div>
                 </div>
+              
+              <div class="row">
+                <div class="col-12 text-center mt-3 mb-3">
+                    <h2>Validación de Cliente (Uso de Agentes)</h2>
+                  </div>
+              </div>
 
+              <div class="row">
+                <div class="col-12 col-md-6">
+                   <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Límite de Crédito ($)
+                          </label>
+
+                          <input type="number" name="limite_credito" class="form-control" value="{{ $user->limite_credito }}">
+
+                    </div>
+
+                </div>
+                <div class="col-12 col-md-6">
+                  <div class="form-group">
+
+                          <!-- Label -->
+                          @if($user->validadoPor != null)
+                          <label>
+                            Validado por: {{ title_case($user->validadoPor->primer_nombre) }} {{ title_case($user->validadoPor->primer_apellido) }}
+                          </label>
+                          @endif
+
+                          <!-- <input type="number" name="limite_credito" class="form-control" value="{{ $user->limite_credito }}"> -->
+
+                    </div>
+                </div>
+              </div>
               <!-- Divider -->
               <hr class="mt-4 mb-5">
 

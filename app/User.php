@@ -30,6 +30,7 @@ class User extends Authenticatable
         'genero',
         'estado_civil',
         'personas_cargo',
+        'limite_credito',
         'tipo_vivienda',
         'telefono_fijo',
         'telefono_celular',
@@ -38,6 +39,8 @@ class User extends Authenticatable
         'ciudad',
         'barrio',
         'direccion',
+        'registro_id',
+        'validado_id',
         'email', 
         'password'
     ];
@@ -65,6 +68,13 @@ class User extends Authenticatable
         return $this->all();
     }
 
+    public function usuariosConCredito()
+    {
+        return $this->where('limite_credito' , '!=' , null)
+                    ->where('validado_id' , '!=' , null)
+                    ->get();
+    }
+
     public function creditos()
     {
         return $this->hasMany(Credito::class , 'user_id');
@@ -78,5 +88,10 @@ class User extends Authenticatable
     public function mensajesNoLeidos()
     {
         return Mensaje::where('user_id' , $this->id)->where('leido' , 0)->get();
+    }
+
+    public function validadoPor()
+    {
+        return $this->belongsTo(User::class , 'validado_id');
     }
 }

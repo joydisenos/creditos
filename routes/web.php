@@ -24,6 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 		Route::get('/ver/credito/{id}', 'UsuarioController@verCredito')->name('usuario.ver.credito');
 		
 		Route::get('/mensajes', 'UsuarioController@mensajes')->name('usuario.mensajes');
+		Route::get('/ver/{id}/mensaje', 'UsuarioController@verMensaje')->name('usuario.ver.mensaje');
 	});
 
 	//Admin

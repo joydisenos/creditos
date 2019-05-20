@@ -51,6 +51,7 @@ class AdminController extends Controller
 
 		$datos = $request->except('password_confirmation');
 		$datos['password'] = Hash::make($request->password);
+        $datos['registro_id'] = Auth::user()->id;
 
     	User::create($datos);
 
@@ -82,6 +83,11 @@ class AdminController extends Controller
             $datos = $request->all();
             $datos['password'] = Hash::make($request->password);
         }
+
+        if($request->has('limite_credito') && $request->limite_credito != null)
+        {
+            $datos['validado_id'] = Auth::user()->id;
+        }
         
 
         $user = User::findOrFail($id)->update($datos);
@@ -100,7 +106,7 @@ class AdminController extends Controller
     public function crearCredito()
     {
         $userRef = new User();
-        $users = $userRef->usuarios();
+        $users = $userRef->usuariosConCredito();
 
         return view('dash.crearcredito' , compact('users'));
     }

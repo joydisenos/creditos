@@ -5,6 +5,25 @@
   .detallado{
     display: none;
   }
+  .btn-agregar-producto{
+    padding: 30px;
+    border: dashed medium #ececec;
+    width: 100%;
+    text-align: center;
+    color: #cccccc;
+    cursor: pointer;
+    margin-bottom: 30px;
+  }
+  .loop-productos{
+    width: 100%;
+  }
+  .eliminar{
+    padding: 15px;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 </style>
 @endsection
 
@@ -102,12 +121,53 @@
                     </label>
 
                     <!-- Input -->
-                    <input type="number" class="form-control calculo" value="12" id="interes" name="interes" required>
+                    <input type="number" class="form-control calculo" value="3" id="interes" name="interes" required>
 
                   </div>
 
                 </div>
+              </div>
 
+                <div class="lista-productos row">
+                <div class="col-12 col-md-6">
+                  <!-- Last name -->
+                  <div class="form-group">
+
+                    <!-- Label -->
+                    <label>
+                      Nombre de Producto
+                    </label>
+
+                    <!-- Input -->
+                    <input type="text" class="form-control producto-nombre" name="producto[]" required>
+
+                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <div class="form-group">
+
+                    <!-- Label -->
+                    <label>
+                      Precio de Producto ($)
+                    </label>
+
+                    <!-- Input -->
+                    <input type="number" class="form-control producto-precio" value="0" name="precio[]" required>
+
+                  </div>
+                </div>
+                
+                <!-- Loop productos -->
+
+                <div class="loop-productos"></div>
+                
+                </div>
+
+                <div class="btn-agregar-producto">
+                  <h2>+ Agregar Producto</h2>
+                </div>
+
+                <div class="row">
                  <div class="col-12 col-md-6">
                   
                   <!-- First name -->
@@ -131,11 +191,11 @@
 
                     <!-- Label -->
                     <label>
-                      Monto
+                      Monto de Crédito (incluye gastos administrativos)
                     </label>
 
                     <!-- Input -->
-                    <input type="number" step="0.01" class="form-control calculo" id="monto" value="1" name="monto">
+                    <input type="number" step="0.01" class="form-control calculo" id="monto" value="1" name="monto" disabled>
 
                   </div>
 
@@ -150,6 +210,13 @@
 
               <div class="row">
                 <div class="col-12">
+
+                  <div class="text-right">
+                    <h5>Subtotal: $<span id="subtotal">0</span></h5>
+                    <h5>Comisión: $<span id="comision">0</span></h5>
+                    <h5>Costo Administrativo: $<span id="administrativo">0</span></h5>
+                    <h5>Total Crédito: $<span id="total-credito">0</span></h5>
+                  </div>
 
                   <div class="text-center">
                     <h3>Cuotas</h3>
@@ -212,35 +279,115 @@
 <script>
   $(document).ready(function(){
 
+    $('.lista-productos').on( 'change keyup', '.producto-precio' , function(){
+      contarPrecios();
+    } );
+
+
+    $('.btn-agregar-producto').click(function(){
+      agregarProducto();
+    });
+
+    $('.loop-productos').on('click','.eliminar',function(){
+      $(this).parents(".producto-item").remove();
+      contarPrecios();
+    });
+
     $('.calculo').keyup(function(){
 
-      $('.table-body').empty();
+      calcular();
+    
+    });
 
-      monto = parseFloat($('#monto').val());
+    $('.calculo').change(function(){
+
+      calcular();
+    
+    });
+
+    function contarPrecios()
+    {
+      precio = 0;
+      
+        $('.producto-precio').each(function(){
+          precio += parseFloat($(this).val());
+        });
+
+        // Comisión 35%
+        comision = Math.round(precio * 0.35);
+        //Precio gastos administrativos 10000
+        admin = 10000;
+
+        total = Math.round(precio + comision + admin);
+        
+        $('#subtotal').html(precio);
+        $('#comision').html(comision);
+        $('#administrativo').html(admin);
+        $('#total-credito').html(total);
+        $('#monto').val(total);
+
+        calcular();
+    }
+
+    function agregarProducto()
+    {
+      producto = `<div class="producto-item"> 
+                <div class="container">
+                <div class="row">
+                <div class="col-12 col-md-6"> <div class="form-group">
+                    <label>
+                      Nombre de Producto
+                    </label>
+
+                    <input type="text" class="form-control producto-nombre" name="producto[]" required>
+
+                  </div>
+                </div>
+                <div class="col-11 col-md-5">
+                  <div class="form-group">
+                    <label>
+                      Precio de Producto ($)
+                    </label>
+                    <input type="number" class="form-control producto-precio" value="0" name="precio[]" required>
+                  </div>
+                </div>
+                <div class="col-1 justify-content-center d-flex align-items-center">
+                  <div class="eliminar bg-primary">X</div>
+                </div>
+                </div>
+                </div>
+                </div>`;
+
+      $('.loop-productos').append(producto);
+    }
+
+    function calcular()
+    {
+        $('.table-body').empty();
+
+      monto = Math.round( parseFloat($('#monto').val()) );
       interesPorcentaje = parseFloat($('#interes').val());
       tasa = parseFloat(interesPorcentaje) / 100;
       cuotas = parseFloat($('#cuotas').val());
 
-      // $('#total').html(total);
-
       // Cuota Fija
       valor = monto *( (tasa * Math.pow(1 + tasa, cuotas)) / (Math.pow(1 + tasa, cuotas) - 1) );
-      valor = valor.toFixed(2);
+      valor = Math.round(valor);
 
       //Amortización
-      valor_de_cuota = valor;
-      saldo_al_capital = monto;
+      valor_de_cuota = Math.round(valor);
+      saldo_al_capital = Math.round(monto);
       items = new Array();
 
       for (i=0; i < cuotas; i++) {
-          interes = saldo_al_capital * tasa ;
-          abono_al_capital = valor_de_cuota - interes;
-          saldo_al_capital -= abono_al_capital;
+          interes = Math.round(saldo_al_capital * tasa) ;
+          abono_al_capital = Math.round(valor_de_cuota - interes);
+          saldo_al_capital -= Math.round(abono_al_capital);
           numero = i + 1;
           
-          interes = interes.toFixed(2);
-          abono_al_capital = abono_al_capital.toFixed(2);
-          saldo_al_capital = saldo_al_capital.toFixed(2);
+          interes = Math.round(interes);
+          abono_al_capital = Math.round(abono_al_capital);
+          saldo_al_capital = Math.round(saldo_al_capital);
 
           item = [numero, interes, abono_al_capital, valor_de_cuota, saldo_al_capital];
           items.push(item);
@@ -248,17 +395,22 @@
 
      for (i = 0; i < items.length; i++) {
               item = items[i];
-              if(item[4] < 1)
+              if(i == items.length - 1)
               {
-                item[4] = 0;
+                if(item[4] > 0){
+                  item[3] = item[3] + item[4];
+                  item[4] = 0;
+                }else{
+                  item[4] = 0;
+                }
               }
-              $('.table-body').append('<tr><td>'+ item[0] +'</td><td>' + item[1] + '</td><td>' + item[2] + '</td><td>' + item[3] + '</td><td>' + item[4] + '</td></tr>');
+              $('.table-body').append('<tr><td>'+ item[0] +'</td><td>$' + item[1] + '</td><td>$' + item[2] + '</td><td>$' + item[3] + '</td><td>$' + item[4] + '</td></tr>');
           }
 
           $('#array').val(JSON.stringify(items));
-          console.log(JSON.stringify(items));
+          // console.log(JSON.stringify(items));
 
-    });
+    }
    
   });
 </script>

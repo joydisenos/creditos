@@ -99,7 +99,7 @@
                   </thead>
                   <tbody class="list">
                   	@foreach($mensajes as $mensaje)
-                    <tr>
+                    <tr class="{{ ($mensaje->leido == 1)? '' : 'font-weight-bold' }}">
                       <td>
                         <div class="custom-control custom-checkbox table-checkbox">
                           <input type="checkbox" class="custom-control-input" name="ordersSelect" id="ordersSelect{{$mensaje->id}}">
@@ -118,7 +118,7 @@
                         {{ $mensaje->created_at->format('d/m') }}
                       </td>
                       <td class="orders-total">
-                        {{ $mensaje->leido }}
+                        <span class="{{ ($mensaje->leido == 1)? 'fe fe-check-circle text-success' : 'fe fe-book text-danger' }}"></span>
                       </td>
                       
                       <td class="text-right">
@@ -127,7 +127,7 @@
                             <i class="fe fe-more-vertical"></i>
                           </a>
                           <div class="dropdown-menu dropdown-menu-right">
-                            <a href="#" class="dropdown-item">
+                            <a href="{{ route('usuario.ver.mensaje' , $mensaje->id) }}" class="dropdown-item">
                               Ver mensaje
                             </a>
                             

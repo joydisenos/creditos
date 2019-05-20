@@ -21,6 +21,8 @@ class CreateCreditosTable extends Migration
             $table->boolean('inicial')->default(0);
             $table->float('interes');
             $table->float('monto');
+            $table->float('por_pagar');
+            $table->string('productos');
             $table->float('monto_inicial')->nullable()->default(null);
             $table->integer('estatus')->default(0);
             $table->timestamps();
