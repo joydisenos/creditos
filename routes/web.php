@@ -45,5 +45,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 		Route::get('/enviar/mensaje', 'AdminController@enviarMensaje')->name('admin.enviar.mensaje');
 		Route::post('/enviar/nuevo/mensaje', 'AdminController@enviarNuevoMensaje')->name('admin.enviar.nuevo.mensaje');
+
+		Route::get('/pagos', 'AdminController@pagos')->name('admin.ver.pagos');
 	
 	});

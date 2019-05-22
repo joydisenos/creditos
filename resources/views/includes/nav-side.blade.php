@@ -105,8 +105,23 @@
               </li>
 
               <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.ver.pagos') }}" role="button">
+                  <i class="fe fe-layers"></i> Pagos
+                </a>
+              </li>
+
+              <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.enviar.mensaje') }}" role="button">
                   <i class="fe fe-mail"></i> Mensajes
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" role="button"
+                    href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                  <i class="fe fe-corner-down-left"></i> Salir
                 </a>
               </li>
 
@@ -137,7 +152,7 @@
 
               <li class="nav-item">
                 <a class="nav-link" href="{{ route('usuario.mensajes') }}" role="button">
-                  <i class="fe fe-activity"></i> Mensajes
+                  <i class="fe fe-message-circle"></i> Mensajes
                 </a>
               </li>
 

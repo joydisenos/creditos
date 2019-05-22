@@ -61,7 +61,7 @@
                   <!-- Last name -->
                   <div class="form-group">
 
-                    {{ $credito->monto }}
+                    ${{ $credito->monto }}
 
                   </div>
 
@@ -107,16 +107,16 @@
                         <tr>
                         	<td> {{ $key + 1 }} </td>
                         	<td>
-                        		{{ $cuota->interes }}
+                        		${{ $cuota->interes }}
                         	</td>
                         	<td>
-                        		{{ $cuota->abono }}
+                        		${{ $cuota->abono }}
                         	</td>
                         	<td>
-                        		{{ $cuota->monto }}
+                        		${{ $cuota->monto }}
                         	</td>
                         	<td>
-                        		{{ $cuota->saldo }}
+                        		${{ $cuota->saldo }}
                         	</td>
                         </tr>
                         @endforeach

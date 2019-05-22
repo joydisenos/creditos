@@ -21,35 +21,32 @@
 
             <!-- List group -->
             <div class="list-group list-group-flush my--3">
-              <a class="list-group-item px-0" href="#!">
+              
           
-                <div class="row">
-                  <div class="col-auto">
-                
-                    <!-- Avatar -->
-                    <div class="avatar avatar-sm">
-                      <img src="{{ asset('assets/img/avatars/profiles/avatar-1.jpg')}}" alt="..." class="avatar-img rounded-circle">
-                    </div>
-
-                  </div>
+              @foreach(Auth::user()->mensajesNoLeidos()  as $mensaje)
+              <a class="list-group-item px-0" href="{{ route('usuario.ver.mensaje' , $mensaje->id) }}">
+                <div class="row mb-2">
+                  
                   <div class="col ml--2">
                 
                     <!-- Content -->
                     <div class="small text-muted">
-                      <strong class="text-body">Dianna Smiley</strong> shared your post with <strong class="text-body">Ab Hadley</strong>, <strong class="text-body">Adolfo Hess</strong>, and <strong class="text-body">3 others</strong>.
+                      <strong class="text-body">{{ $mensaje->asunto }}</strong> {{ str_limit($mensaje->mensaje , 20) }}.
                     </div>
 
                   </div>
                   <div class="col-auto">
 
                     <small class="text-muted">
-                      2m
+                      {{ $mensaje->created_at->format('d/m') }}
                     </small>
                 
                   </div>
                 </div> <!-- / .row -->
+                </a>
+                @endforeach
 
-              </a>
+              
              
             </div>
 

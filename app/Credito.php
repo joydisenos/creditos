@@ -8,7 +8,15 @@ class Credito extends Model
 {
 
 	protected $fillable = [
-        'user_id', 'admin_id','cuotas','inicial','interes','monto','monto_inicial'
+        'user_id', 
+        'admin_id',
+        'cuotas',
+        'inicial',
+        'interes',
+        'por_pagar',
+        'productos',
+        'monto',
+        'monto_inicial'
     ];
 
 	public function creditos()
@@ -24,5 +32,13 @@ class Credito extends Model
     public function user()
     {
     	return $this->belongsTo(User::class , 'user_id');
+    }
+
+    public function porPagar()
+    {
+        return $this->where('por_pagar' , '!=' , null)
+                    ->where('por_pagar' , '>' , 0)
+                    ->where('productos_pagos' , 0)
+                    ->get();
     }
 }

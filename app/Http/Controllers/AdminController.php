@@ -170,4 +170,12 @@ class AdminController extends Controller
 
         return redirect()->back()->with('status' , 'Mensaje enviado!');
     }
+
+    public function pagos()
+    {
+        $refPagos = new Credito();
+        $pagos = $refPagos->porPagar();
+
+        return view('dash.porpagar' , compact('pagos'));
+    }
 }

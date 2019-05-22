@@ -8,22 +8,23 @@
                     
                     <!-- Pretitle -->
                     <h6 class="header-pretitle">
-                      Créditos
+                      Pagos
                     </h6>
 
                     <!-- Title -->
                     <h1 class="header-title">
-                      Créditos Registrados
+                      Registro de Pagos
                     </h1>
 
                   </div>
                   <div class="col-auto">
                     
-                    <!-- Button -->
-                    <a href="{{ route('admin.crear.credito') }}" class="btn btn-primary">
+                    <!-- Button 
+                    <a href="#" class="btn btn-primary">
                       Nuevo Crédito
                     </a>
-                    
+                    -->
+
                   </div>
                 </div> <!-- / .row -->
                 
@@ -79,7 +80,7 @@
                       </th>
                       <th>
                         <a href="#" class="text-muted sort" data-sort="orders-order">
-                          Nombre
+                          Almacén
                         </a>
                       </th>
                       <th>
@@ -94,60 +95,45 @@
                       </th>
                       <th>
                         <a href="#" class="text-muted sort" data-sort="orders-total">
-                          Cuotas
+                          Fecha
                         </a>
                       </th>
-                      <th>
-                        <a href="#" class="text-muted sort" data-sort="orders-status">
-                          Tasa
-                        </a>
-                      </th>
-                      <th colspan="2">
-                        <a href="#" class="text-muted sort" data-sort="orders-method">
-                          Estatus
-                        </a>
-                      </th>
+
+                      <th></th>
+                      
                     </tr>
                   </thead>
                   <tbody class="list">
-                  	@foreach($creditos as $credito)
+                  	@foreach($pagos as $pago)
                     <tr>
                       <td>
                         <div class="custom-control custom-checkbox table-checkbox">
-                          <input type="checkbox" class="custom-control-input" name="ordersSelect" id="ordersSelect{{$credito->id}}">
-                          <label class="custom-control-label" for="ordersSelect{{$credito->id}}">
+                          <input type="checkbox" class="custom-control-input" name="ordersSelect" id="ordersSelect{{$pago->id}}">
+                          <label class="custom-control-label" for="ordersSelect{{$pago->id}}">
                             &nbsp;
                           </label>
                         </div>
                       </td>
                       <td class="orders-order">
-                        {{ title_case($credito->user->primer_nombre) }} {{ title_case($credito->user->primer_apellido) }}
+                        {{ title_case($pago->user->primer_nombre) }} {{ title_case($pago->user->primer_apellido) }}
                       </td>
                       <td class="orders-product">
-                        {{ $credito->user->email }}
+                        {{ $pago->user->email }}
                       </td>
                       <td class="orders-date">
-                        ${{ $credito->monto }}
+                        ${{ $pago->por_pagar }}
                       </td>
                       <td class="orders-total">
-                        {{ $credito->cuotas }}
+                        {{ $pago->created_at->format('d/y') }}
                       </td>
-                      <td class="orders-status">
-                      	{{ $credito->interes }}
-                        <!--<div class="badge badge-soft-success">
-                          Shipped
-                        </div>-->
-                      </td>
-                      <td class="orders-method">
-                        {{ $credito->estatus }}
-                      </td>
+                      
                       <td class="text-right">
                         <div class="dropdown">
                           <a href="#!" class="dropdown-ellipses dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-boundary="window">
                             <i class="fe fe-more-vertical"></i>
                           </a>
                           <div class="dropdown-menu dropdown-menu-right">
-                            <a href="{{ route('admin.ver.credito' , [$credito->id]) }}" class="dropdown-item">
+                            <a href="{{ route('admin.ver.credito' , [$pago->id]) }}" class="dropdown-item">
                               Más Detalles
                             </a>
                             

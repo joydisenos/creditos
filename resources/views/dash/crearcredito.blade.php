@@ -47,38 +47,6 @@
                   </div>
                 </div> <!-- / .row -->
 
-                <!-- Nav -->
-
-                <!--
-                <div class="row align-items-center">
-                  <div class="col">
-                    
-                    <ul class="nav nav-tabs nav-overflow header-tabs">
-                      <li class="nav-item">
-                        <a href="#!" class="nav-link active">
-                          General
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="#!" class="nav-link">
-                          Profile
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="#!" class="nav-link">
-                          Billing
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="#!" class="nav-link">
-                          Notifications
-                        </a>
-                      </li>
-                    </ul>
-
-                  </div>
-                </div>
-            -->
               </div>
             </div>
 
@@ -89,6 +57,9 @@
             	@csrf
               
               <input type="hidden" name="cuotas_array" id="array">
+              <input type="hidden" name="productos" id="productos-array">
+              <input type="hidden" name="por_pagar" id="por_pagar">
+
               <div class="row">
                 <div class="col-12 col-md-6">
                   
@@ -128,7 +99,7 @@
                 </div>
               </div>
 
-                <div class="lista-productos row">
+                <div class="producto-item row">
                 <div class="col-12 col-md-6">
                   <!-- Last name -->
                   <div class="form-group">
@@ -159,9 +130,11 @@
                 
                 <!-- Loop productos -->
 
-                <div class="loop-productos"></div>
+                
                 
                 </div>
+
+                <div class="loop-productos"></div>
 
                 <div class="btn-agregar-producto">
                   <h2>+ Agregar Producto</h2>
@@ -195,7 +168,7 @@
                     </label>
 
                     <!-- Input -->
-                    <input type="number" step="0.01" class="form-control calculo" id="monto" value="1" name="monto" disabled>
+                    <input type="number" step="0.01" class="form-control calculo" id="monto" value="1" name="monto" readonly>
 
                   </div>
 
@@ -279,10 +252,17 @@
 <script>
   $(document).ready(function(){
 
-    $('.lista-productos').on( 'change keyup', '.producto-precio' , function(){
+    $('.loop-productos').on( 'change keyup', '.producto-precio , .producto-nombre' , function(){
       contarPrecios();
     } );
 
+    $('.producto-precio , .producto-nombre').change(function(){
+      contarPrecios();
+    } );
+
+    $('.producto-precio , .producto-nombre').keyup(function(){
+      contarPrecios();
+    } );
 
     $('.btn-agregar-producto').click(function(){
       agregarProducto();
@@ -308,10 +288,20 @@
     function contarPrecios()
     {
       precio = 0;
+      productos = new Array();
       
         $('.producto-precio').each(function(){
           precio += parseFloat($(this).val());
+
+          nombre = $(this).parents(".producto-item").find('.producto-nombre').val();
+          precioProducto = $(this).parents(".producto-item").find('.producto-precio').val();
+          
+            producto = [nombre , precioProducto];
+            productos.push(producto);
         });
+
+        $('#productos-array').val(JSON.stringify(productos));
+        //console.log(JSON.stringify(productos));
 
         // Comisión 35%
         comision = Math.round(precio * 0.35);
@@ -321,10 +311,13 @@
         total = Math.round(precio + comision + admin);
         
         $('#subtotal').html(precio);
+        $('#por_pagar').val(precio);
         $('#comision').html(comision);
         $('#administrativo').html(admin);
         $('#total-credito').html(total);
         $('#monto').val(total);
+
+
 
         calcular();
     }
@@ -332,7 +325,7 @@
     function agregarProducto()
     {
       producto = `<div class="producto-item"> 
-                <div class="container">
+                
                 <div class="row">
                 <div class="col-12 col-md-6"> <div class="form-group">
                     <label>
@@ -355,7 +348,7 @@
                   <div class="eliminar bg-primary">X</div>
                 </div>
                 </div>
-                </div>
+                
                 </div>`;
 
       $('.loop-productos').append(producto);

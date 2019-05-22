@@ -139,7 +139,7 @@
                         </div>-->
                       </td>
                       <td class="orders-method">
-                        8
+                        {{ $user->creditos->count() }}
                       </td>
                       <td class="text-right">
                         <div class="dropdown">
