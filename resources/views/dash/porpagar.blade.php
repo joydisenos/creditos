@@ -32,7 +32,7 @@
             </div>
 
             <!-- Card -->
-            <div class="card" data-toggle="lists" data-lists-values='["orders-order", "orders-product", "orders-date", "orders-total", "orders-status", "orders-method"]'>
+            <div class="card" data-toggle="lists" data-lists-values='["orders-id","orders-order", "orders-product", "orders-date", "orders-total", "orders-status", "orders-method"]'>
               <div class="card-header">
                 <div class="row align-items-center">
                   <div class="col">
@@ -79,6 +79,11 @@
                         </div>
                       </th>
                       <th>
+                        <a href="#" class="text-muted sort" data-sort="orders-id">
+                          Número
+                        </a>
+                      </th>
+                      <th>
                         <a href="#" class="text-muted sort" data-sort="orders-order">
                           Almacén
                         </a>
@@ -114,6 +119,9 @@
                           </label>
                         </div>
                       </td>
+                      <td class="orders-id">
+                        {{ $pago->id }}
+                      </td>
                       <td class="orders-order">
                         {{ title_case($pago->user->primer_nombre) }} {{ title_case($pago->user->primer_apellido) }}
                       </td>
@@ -121,7 +129,7 @@
                         {{ $pago->user->email }}
                       </td>
                       <td class="orders-date">
-                        ${{ $pago->por_pagar }}
+                        ${{ round($pago->por_pagar) }}
                       </td>
                       <td class="orders-total">
                         {{ $pago->created_at->format('d/y') }}
@@ -133,6 +141,9 @@
                             <i class="fe fe-more-vertical"></i>
                           </a>
                           <div class="dropdown-menu dropdown-menu-right">
+                            <a href="{{ route('admin.marcar.pago' , [$pago->id]) }}" class="dropdown-item">
+                              Marcar como pago
+                            </a>
                             <a href="{{ route('admin.ver.credito' , [$pago->id]) }}" class="dropdown-item">
                               Más Detalles
                             </a>

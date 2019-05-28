@@ -53,7 +53,14 @@
                 </div>
               </div>
             </form>
+            
+            <hr class="navbar-divider my-3">
+            <!-- Heading -->
+            <h6 class="navbar-heading">
+              Bienvenido {{ title_case(Auth::user()->primer_nombre) }}
+            </h6>
 
+            @role('dev|admin|agente')
             <!-- Divider -->
             <hr class="navbar-divider my-3">
 
@@ -85,36 +92,45 @@
                 </div>
               </li>-->
 
-
+              @role('admin|dev')
               <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.dashboard') }}" role="button">
                   <i class="fe fe-activity"></i> Dashboard
                 </a>
               </li>
-
+              @endrole
+              
+              @role('admin|agente|dev')
               <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.usuarios') }}" role="button">
                   <i class="fe fe-users"></i> Usuarios
                 </a>
               </li>
-
+              @endrole
+              
+              @role('admin|agente|dev')
               <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.creditos') }}" role="button">
                   <i class="fe fe-book-open"></i> Créditos
                 </a>
               </li>
+              @endrole
 
+              @role('admin|dev')
               <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.ver.pagos') }}" role="button">
                   <i class="fe fe-layers"></i> Pagos
                 </a>
               </li>
-
+              @endrole
+              
+              @role('admin|agente|dev')
               <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.enviar.mensaje') }}" role="button">
                   <i class="fe fe-mail"></i> Mensajes
                 </a>
               </li>
+              @endrole
 
               <li class="nav-item">
                 <a class="nav-link" role="button"
@@ -127,12 +143,15 @@
 
             </ul>
 
+            @endrole
+            
+            @role('almacen|dev')
             <!-- Divider -->
             <hr class="navbar-divider my-3">
 
             <!-- Heading -->
             <h6 class="navbar-heading">
-              Panel de Usuario
+              Panel de Administrativo
             </h6>
 
 
@@ -143,6 +162,12 @@
                   <i class="fe fe-activity"></i> Inicio
                 </a>
               </li>-->
+              
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('usuario.usuarios') }}" role="button">
+                  <i class="fe fe-users"></i> Usuarios
+                </a>
+              </li>
 
               <li class="nav-item">
                 <a class="nav-link" href="{{ route('usuario.creditos') }}" role="button">
@@ -156,6 +181,15 @@
                 </a>
               </li>
 
+               <li class="nav-item">
+                <a class="nav-link" role="button"
+                    href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                  <i class="fe fe-corner-down-left"></i> Salir
+                </a>
+              </li>
+
               <li class="nav-item d-md-none">
                 <a class="nav-link" href="#sidebarModalActivity" data-toggle="modal">
                  <span class="fe fe-bell"></span> Notificaciones
@@ -164,6 +198,7 @@
 
 
             </ul>
+            @endrole
 
         
           

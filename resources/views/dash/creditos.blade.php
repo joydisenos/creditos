@@ -31,7 +31,7 @@
             </div>
 
             <!-- Card -->
-            <div class="card" data-toggle="lists" data-lists-values='["orders-order", "orders-product", "orders-date", "orders-total", "orders-status", "orders-method"]'>
+            <div class="card" data-toggle="lists" data-lists-values='["orders-id","orders-order", "orders-product", "orders-date", "orders-total", "orders-status", "orders-method"]'>
               <div class="card-header">
                 <div class="row align-items-center">
                   <div class="col">
@@ -49,7 +49,7 @@
                   </div>
                   <div class="col-auto">
                     
-                    <!-- Button -->
+                    <!-- Button 
 
                     <div class="dropdown">
                       <button class="btn btn-sm btn-white dropdown-toggle" type="button" id="bulkActionDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -60,7 +60,7 @@
                         <a class="dropdown-item" href="#!">Acción</a>
                         <a class="dropdown-item" href="#!">Acción</a>
                       </div>
-                    </div>
+                    </div>-->
 
                   </div>
                 </div> <!-- / .row -->
@@ -78,6 +78,11 @@
                         </div>
                       </th>
                       <th>
+                        <a href="#" class="text-muted sort" data-sort="orders-id">
+                          Número
+                        </a>
+                      </th>
+                      <th>
                         <a href="#" class="text-muted sort" data-sort="orders-order">
                           Nombre
                         </a>
@@ -87,6 +92,13 @@
                           Email
                         </a>
                       </th>
+                      @role('admin|agente|dev')
+                      <th>
+                        <a href="#" class="text-muted sort" data-sort="almacen">
+                          Almacén
+                        </a>
+                      </th>
+                      @endrole
                       <th>
                         <a href="#" class="text-muted sort" data-sort="orders-date">
                           Monto
@@ -120,12 +132,22 @@
                           </label>
                         </div>
                       </td>
+                      <td class="orders-id">
+                        {{ $credito->id }}
+                      </td>
                       <td class="orders-order">
                         {{ title_case($credito->user->primer_nombre) }} {{ title_case($credito->user->primer_apellido) }}
                       </td>
                       <td class="orders-product">
                         {{ $credito->user->email }}
                       </td>
+
+                      @role('admin|agente|dev')
+                      <td class="orders-product">
+                        {{ ($credito->almacen)? $credito->almacen->nombre_almacen : 'No Suministrado' }}
+                      </td>
+                      @endrole
+
                       <td class="orders-date">
                         ${{ $credito->monto }}
                       </td>
@@ -139,7 +161,7 @@
                         </div>-->
                       </td>
                       <td class="orders-method">
-                        {{ $credito->estatus }}
+                        {!! $credito->estatusCredito($credito->estatus) !!}
                       </td>
                       <td class="text-right">
                         <div class="dropdown">
@@ -147,6 +169,14 @@
                             <i class="fe fe-more-vertical"></i>
                           </a>
                           <div class="dropdown-menu dropdown-menu-right">
+                            @role('admin|agente|dev')
+                            <a href="{{ route('admin.aprobar.credito' , [$credito->id]) }}" class="dropdown-item">
+                              Aprobar
+                            </a>
+                            <a href="{{ route('admin.negar.credito' , [$credito->id]) }}" class="dropdown-item">
+                              Negar
+                            </a>
+                            @endrole
                             <a href="{{ route('admin.ver.credito' , [$credito->id]) }}" class="dropdown-item">
                               Más Detalles
                             </a>

@@ -8,12 +8,12 @@
                     
                     <!-- Pretitle -->
                     <h6 class="header-pretitle">
-                      Overview
+                      Dashboard
                     </h6>
 
                     <!-- Title -->
                     <h1 class="header-title">
-                      Orders
+                      Créditos
                     </h1>
 
                   </div>

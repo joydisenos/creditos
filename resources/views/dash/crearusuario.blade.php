@@ -225,29 +225,39 @@
 
                     <!-- Label -->
                     <label class="mb-1">
-                      Perfil de Administrador
+                      Tipo de Perfil
                     </label>
 
-                    <!-- Form text -->
-                    <small class="form-text text-muted">
-                      Este usuario tendrá acceso al panel de control administrativo de la web
-                    </small>
-
                     <div class="row">
-                      <div class="col-auto">
+                      <div class="col">
                         
-                        <!-- Toggle -->
-                        <div class="custom-control custom-checkbox-toggle">
-                          <input type="checkbox" class="custom-control-input" id="adminbtn">
-                          <label class="custom-control-label" for="adminbtn"></label>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" name="tipo_usuario" id="tipo1" class="tipo_usuario custom-control-input" value="0" checked>
+                          <label class="custom-control-label"  for="tipo1">Cliente</label>
                         </div>
+                        @role('agente|admin|dev')
+                        <div class="custom-control custom-radio">
+                          <input type="radio" name="tipo_usuario" id="tipo2" class="tipo_usuario custom-control-input" value="1">
+                          <label class="custom-control-label"  for="tipo2">Almacén</label>
+                        </div>
+                        @endrole
+                        @role('admin|dev')
+                        <div class="custom-control custom-radio">
+                          <input type="radio" name="tipo_usuario" id="tipo3" class="tipo_usuario custom-control-input" value="2">
+                          <label class="custom-control-label"  for="tipo3">Agente</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" name="tipo_usuario" id="tipo4" class="tipo_usuario custom-control-input" value="3">
+                          <label class="custom-control-label"  for="tipo4">Admin</label>
+                        </div>
+                        @endrole
 
                       </div>
                       
                     </div> <!-- / .row -->
                   </div>
 
-                   <div class="form-group">
+                   <div class="form-group perfil_detallado">
 
                     <!-- Label -->
                     <label class="mb-1">
@@ -275,6 +285,18 @@
 
                 </div>
                 <div class="col-12 col-md-6">
+
+                  <div class="form-group almacen" style="display: none;">
+
+                    <!-- Label -->
+                    <label>
+                      Nombre del Almacén <span class="text-danger">*</span>
+                    </label>
+
+                    <!-- Input -->
+                    <input type="text" class="form-control" id="nombre_almacen" name="nombre_almacen" disabled>
+
+                  </div>
                   
                   <!-- Password -->
                   <div class="form-group">
@@ -533,6 +555,27 @@
           $('.detallado').hide();
         }
 
+    });
+
+    $('.tipo_usuario').change(function(){
+      if($(this).val() == 1)
+      {
+        $('.almacen').show();
+        $('#nombre_almacen').prop('disabled' , false);
+        $('#nombre_almacen').prop('required' , true);
+      }else{
+        $('.almacen').hide();
+        $('#nombre_almacen').prop('disabled' , true);
+        $('#nombre_almacen').prop('required' , false);
+      }
+
+      if($(this).val() == 0)
+      {
+        $('.perfil_detallado').show();
+      }else{
+        $('.perfil_detallado').hide();
+        $('.detallado').hide();
+      }
     });
   });
 </script>

@@ -31,7 +31,7 @@
             </div>
 
             <!-- Card -->
-            <div class="card" data-toggle="lists" data-lists-values='["orders-order", "orders-product", "orders-date", "orders-total", "orders-status", "orders-method"]'>
+            <div class="card" data-toggle="lists" data-lists-values='["orders-order", "orders-product", "orders-date", "orders-total", "orders-status", "orders-registrado", "orders-method"]'>
               <div class="card-header">
                 <div class="row align-items-center">
                   <div class="col">
@@ -87,6 +87,13 @@
                           Email
                         </a>
                       </th>
+                      @role('admin|agente|dev')
+                      <th>
+                        <a href="#" class="text-muted sort" data-sort="orders-registrado">
+                          Registrado Por
+                        </a>
+                      </th>
+                      @endrole
                       <th>
                         <a href="#" class="text-muted sort" data-sort="orders-date">
                           Fijo
@@ -126,6 +133,17 @@
                       <td class="orders-product">
                         {{ $user->email }}
                       </td>
+                      @role('admin|agente|dev')
+                      <td class="orders-product">
+                        @if($user->registradoPor != null)
+                          @if($user->registradoPor->nombre_almacen != null)
+                          {{ $user->registradoPor->nombre_almacen }}
+                          @else
+                          {{ title_case($user->registradoPor->primer_nombre) }} {{ title_case($user->registradoPor->primer_apellido) }}
+                          @endif
+                        @endif
+                      </td>
+                      @endrole
                       <td class="orders-date">
                         {{ $user->telefono_fijo }}
                       </td>

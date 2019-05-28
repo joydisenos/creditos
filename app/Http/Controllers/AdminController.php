@@ -9,6 +9,7 @@ use App\User;
 use App\Credito;
 use App\Cuota;
 use App\Mensaje;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -20,7 +21,25 @@ class AdminController extends Controller
 
 	public function dashboard()
 	{
-		return view('dash.dashboard');
+        $creditos = new Credito();
+
+        $creditosPorMes = $creditos->creditosPorMes();
+        $ingresosPorMes = $creditos->ingresosPorMes();
+        $pagosPorMes = $creditos->pagosPorMes();
+        $creditosAll = $creditos->creditos();
+
+        $creditosMes = $creditos->creditosMes();
+        $ingresosMes = round($creditos->ingresosMes());
+        $pagosMes = round($creditos->pagosMes());
+        
+        $totalEstatusCreditos = $creditos->totalEstatusCreditos();
+        $pagos = $creditos->porPagar();
+
+        $cuotas = new Cuota();
+        $estadisticaPagos = $cuotas->estadisticaPagos();
+        $estadisticaPagosPendientes = $cuotas->estadisticaPagosPendientes();
+
+		return view('dash.dashboard' , compact('creditosPorMes' , 'ingresosPorMes' , 'pagosPorMes' , 'creditosMes' , 'ingresosMes' , 'pagosMes', 'totalEstatusCreditos','estadisticaPagos' ,'estadisticaPagosPendientes' , 'pagos', 'creditosAll') );
 	}
 
     public function usuarios()
@@ -49,11 +68,30 @@ class AdminController extends Controller
 		    'password' => 'required|min:6|confirmed|string'
 		]);
 
-		$datos = $request->except('password_confirmation');
+		$datos = $request->except(['password_confirmation' , 'tipo_usuario']);
 		$datos['password'] = Hash::make($request->password);
         $datos['registro_id'] = Auth::user()->id;
 
-    	User::create($datos);
+    	$user = User::create($datos);
+
+        switch ($request->tipo_usuario) {
+
+            case 1:
+                $user->assignRole('almacen');
+                break;
+
+            case 2:
+                $user->assignRole('agente');
+                break;
+
+            case 3:
+                $user->assignRole('admin');
+                break;
+            
+            default:
+                # code...
+                break;
+        }
 
     	return redirect()->route('admin.usuarios')->with('status' , 'Usuario creado correctamente');
     }
@@ -127,9 +165,12 @@ class AdminController extends Controller
 
         $credito = Credito::create($datos);
 
-        foreach ($cuotas as $cuota) {
+        $date = Carbon::now();
+
+        foreach ($cuotas as $i => $cuota) {
             $data = [
                 'credito_id' => $credito->id, 
+                'fecha_pago' => $date->addMonth(),
                 'interes' => $cuota[1],
                 'abono' => $cuota[2],
                 'monto' => $cuota[3],
@@ -144,8 +185,9 @@ class AdminController extends Controller
     public function verCredito($id)
     {
         $credito = Credito::findOrFail($id);
+        $productos = json_decode($credito->productos);
 
-        return view('dash.credito' , compact('credito'));
+        return view('dash.credito' , compact('credito','productos'));
     }
 
     public function enviarMensaje()
@@ -177,5 +219,32 @@ class AdminController extends Controller
         $pagos = $refPagos->porPagar();
 
         return view('dash.porpagar' , compact('pagos'));
+    }
+
+    public function marcarPago($id)
+    {
+        $pago = Credito::findOrFail($id);
+        $pago->productos_pagos = 1;
+        $pago->save();
+
+        return redirect()->back()->with('status' , 'Crédito #' . $pago->id . ' marcado como pago');
+    }
+
+    public function aprobarCredito($id)
+    {
+        $credito = Credito::findOrFail($id);
+        $credito->estatus = 1;
+        $credito->save();
+
+        return redirect()->back()->with('status' , 'Crédito Aprobado');
+    }
+
+    public function negarCredito($id)
+    {
+        $credito = Credito::findOrFail($id);
+        $credito->estatus = 2;
+        $credito->save();
+
+        return redirect()->back()->with('status' , 'Crédito Negado');
     }
 }

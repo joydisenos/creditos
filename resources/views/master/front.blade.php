@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <title>{{ config('app.name', 'Laravel') }}</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <meta content="" name="keywords">
-  <meta content="" name="description">
+  <meta content="CloudBank" name="keywords">
+  <meta content="CloudBank" name="description">
 
   <!-- Favicons -->
   <link href="{{ asset('img/isotipo.png') }}" rel="icon">
@@ -66,7 +66,22 @@
                 @endif
               </a>
             <ul>
+              @role('admin|dev')
               <li><a href="{{ route('admin.dashboard') }}">Admin</a></li>
+              @endrole
+
+              @role('admin|dev')
+              <li><a href="{{ route('admin.ver.pagos') }}">Pagos</a></li>
+              @endrole
+
+              @role('admin|agente|dev')
+              <li><a href="{{ route('admin.usuarios') }}">Usuarios</a></li>
+              @endrole
+
+              @role('admin|agente|dev')
+              <li><a href="{{ route('admin.creditos') }}">Creditos</a></li>
+              @endrole
+
               <li><a href="{{ route('usuario.creditos') }}">Créditos</a></li>
               <li><a href="{{ route('usuario.mensajes') }}">Mensajes 
                 @if(Auth::user()->mensajesNoLeidos()->count() > 0)
@@ -189,6 +204,19 @@
 
   <!-- Template Main Javascript File -->
   <script src="{{ asset('js/main.js')}}"></script>
+  <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5cec5bfda667a0210d59b484/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
   @yield('scripts')
 
 </body>

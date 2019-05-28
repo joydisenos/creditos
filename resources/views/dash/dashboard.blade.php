@@ -11,12 +11,12 @@
                 
                 <!-- Pretitle -->
                 <h6 class="header-pretitle text-secondary">
-                  Overview
+                  Dashboard
                 </h6>
 
                 <!-- Title -->
                 <h1 class="header-title text-white">
-                  Performance
+                  Créditos
                 </h1>
 
               </div>
@@ -24,33 +24,34 @@
                 
                 <!-- Nav -->
                 <ul class="nav nav-tabs header-tabs">
-                  <li class="nav-item" data-toggle="chart" data-target="#headerChart" data-update='{"data":{"datasets":[{"data":[0,10,5,15,10,20,15,25,20,30,25,40]}]}}' data-prefix="$" data-suffix="k">
+                  <li class="nav-item" id="credito-data" data-origen="[{{ implode( ',' ,$creditosPorMes) }}]" data-toggle="chart" data-target="#headerChart" data-update='{"data":
+                  {"datasets":[{"data":[ {{ implode( "," ,$creditosPorMes) }} ] }]}}' data-prefix="" data-suffix="">
                     <a href="#" class="nav-link text-center active" data-toggle="tab">
                       <h6 class="header-pretitle text-secondary">
-                        Earnings
+                        Créditos
                       </h6>
                       <h3 class="text-white mb-0">
-                        $19.2k
+                        {{ $creditosMes }}
                       </h3>
                     </a>
                   </li>
-                  <li class="nav-item" data-toggle="chart" data-target="#headerChart" data-update='{"data":{"datasets":[{"data":[50,75, 35,25,55,87,67,53,25,80,87,45]}]}}' data-prefix="" data-suffix="k">
+                  <li class="nav-item" data-toggle="chart" data-target="#headerChart" data-update='{"data":{"datasets":[{"data":[ {{ implode( "," ,$ingresosPorMes) }} ] }]}}' data-prefix="$" data-suffix="">
                     <a href="#" class="nav-link text-center" data-toggle="tab">
                       <h6 class="header-pretitle text-secondary">
-                        Sessions
+                        Ingresos
                       </h6>
                       <h3 class="text-white mb-0">
-                        92.1k
+                        $ {{ $ingresosMes }}
                       </h3>
                     </a>
                   </li>
-                  <li class="nav-item" data-toggle="chart" data-target="#headerChart" data-update='{"data":{"datasets":[{"data":[40,57,25,50,57,32,46,28,59,34,52,48]}]}}' data-prefix="" data-suffix="%">
+                  <li class="nav-item" data-toggle="chart" data-target="#headerChart" data-update='{"data":{"datasets":[{"data":[ {{ implode( "," ,$pagosPorMes) }} ] }]}}' data-prefix="$" data-suffix="">
                     <a href="#" class="nav-link text-center" data-toggle="tab">
                       <h6 class="header-pretitle text-secondary">
-                        Bounce
+                        Pagos
                       </h6>
                       <h3 class="text-white mb-0">
-                        50.2%
+                        $ {{ $pagosMes }}
                       </h3>
                     </a>
                   </li>
@@ -86,7 +87,7 @@
                 
                     <!-- Title -->
                     <h4 class="card-header-title">
-                      Orders
+                      Cobros Pendientes
                     </h4>
 
                   </div>
@@ -94,7 +95,7 @@
                     
                     <!-- Caption -->
                     <span class="text-muted">
-                      Show affiliate:
+                      Mostrar Pagos:
                     </span>
 
                   </div>
@@ -102,7 +103,13 @@
 
                     <!-- Toggle -->
                     <div class="custom-control custom-checkbox-toggle">
-                      <input type="checkbox" class="custom-control-input" id="cardToggle" data-toggle="chart" data-target="#ordersChart" data-add='{"data":{"datasets":[{"data":[15,10,20,12,7,0,8,16,18,16,10,22],"backgroundColor":"#d2ddec","label":"Affiliate"}]}}'>
+                      <input type="checkbox"
+                       class="custom-control-input" 
+                       id="cardToggle" 
+                       data-inicial="[ {{ implode( ',' ,$estadisticaPagosPendientes) }} ]"
+                       data-toggle="chart" 
+                       data-target="#ordersChart" 
+                       data-add='{"data":{"datasets":[{"data": [ {{ implode( "," ,$estadisticaPagos) }} ] ,"backgroundColor":"#d2ddec","label":"Pagos"}]}}'>
                       <label class="custom-control-label" for="cardToggle"></label>
                     </div>
 
@@ -131,7 +138,7 @@
                 
                     <!-- Title -->
                     <h4 class="card-header-title">
-                      Devices
+                      Estatus de Créditos
                     </h4>
 
                   </div>
@@ -139,14 +146,14 @@
 
                     <!-- Tabs -->
                     <ul class="nav nav-tabs nav-tabs-sm card-header-tabs">
-                      <li class="nav-item" data-toggle="chart" data-target="#devicesChart" data-update='{"data":{"datasets":[{"data":[60,25,15]}]}}'>
+                      <li class="nav-item"
+                      id="datos-credito" 
+                      data-toggle="chart" 
+                      data-target="#devicesChart" 
+                      data-inicial="[ {{ implode( ',' ,$totalEstatusCreditos) }} ]" 
+                      data-update='{"data":{"datasets":[{"data": [ {{ implode( "," ,$totalEstatusCreditos) }} ] }]}}'>
                         <a href="#" class="nav-link active" data-toggle="tab">
-                          All
-                        </a>
-                      </li>
-                      <li class="nav-item" data-toggle="chart" data-target="#devicesChart" data-update='{"data":{"datasets":[{"data":[15,45,20]}]}}'>
-                        <a href="#" class="nav-link" data-toggle="tab">
-                          Direct
+                          Este Mes
                         </a>
                       </li>
                     </ul>
@@ -170,151 +177,7 @@
             
           </div>
         </div> <!-- / .row -->
-        <div class="row">
-          <div class="col-12 col-lg-6 col-xl">
-            
-            <!-- Card -->
-            <div class="card">
-              <div class="card-body">
-                <div class="row align-items-center">
-                  <div class="col">
-
-                    <!-- Title -->
-                    <h6 class="card-title text-uppercase text-muted mb-2">
-                      Budget
-                    </h6>
-                    
-                    <!-- Heading -->
-                    <span class="h2 mb-0">
-                      $24,500
-                    </span>
-
-                    <!-- Badge -->
-                    <span class="badge badge-soft-success mt--1">
-                      +3.5%
-                    </span>
-
-                  </div>
-                  <div class="col-auto">
-                    
-                    <!-- Icon -->
-                    <span class="h2 fe fe-dollar-sign text-muted mb-0"></span>
-
-                  </div>
-                </div> <!-- / .row -->
-
-              </div>
-            </div>
-
-          </div>
-          <div class="col-12 col-lg-6 col-xl">
-            
-            <!-- Card -->
-            <div class="card">
-              <div class="card-body">
-                <div class="row align-items-center">
-                  <div class="col">
-
-                    <!-- Title -->
-                    <h6 class="card-title text-uppercase text-muted mb-2">
-                      Total Hours
-                    </h6>
-                    
-                    <!-- Heading -->
-                    <span class="h2 mb-0">
-                      763.5
-                    </span>
-
-                  </div>
-                  <div class="col-auto">
-                    
-                    <!-- Icon -->
-                    <span class="h2 fe fe-briefcase text-muted mb-0"></span>
-
-                  </div>
-                </div> <!-- / .row -->
-
-              </div>
-            </div>
-              
-          </div>
-          <div class="col-12 col-lg-6 col-xl">
-            
-            <!-- Card -->
-            <div class="card">
-              <div class="card-body">
-                <div class="row align-items-center">
-                  <div class="col">
-
-                    <!-- Title -->
-                    <h6 class="card-title text-uppercase text-muted mb-2">
-                      Progress
-                    </h6>
-
-                    <div class="row align-items-center no-gutters">
-                      <div class="col-auto">
-
-                        <!-- Heading -->
-                        <span class="h2 mr-2 mb-0">
-                          84.5%
-                        </span>
-                        
-                      </div>
-                      <div class="col">
-                        
-                        <!-- Progress -->
-                        <div class="progress progress-sm">
-                          <div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-
-                      </div>
-                    </div> <!-- / .row -->
-
-                  </div>
-                  <div class="col-auto">
-                    
-                    <!-- Icon -->
-                    <span class="h2 fe fe-clipboard text-muted mb-0"></span>
-
-                  </div>
-                </div> <!-- / .row -->
-
-              </div>
-            </div>
-              
-          </div>
-          <div class="col-12 col-lg-6 col-xl">
-            
-            <!-- Card -->
-            <div class="card">
-              <div class="card-body">
-                <div class="row align-items-center">
-                  <div class="col">
-
-                    <!-- Title -->
-                    <h6 class="card-title text-uppercase text-muted mb-2">
-                      Effective Hourly
-                    </h6>
-                    
-                    <!-- Heading -->
-                    <span class="h2 mb-0">
-                      $85.50
-                    </span>
-
-                  </div>
-                  <div class="col-auto">
-                    
-                    <!-- Icon -->
-                    <span class="h2 fe fe-clock text-muted mb-0"></span>
-
-                  </div>
-                </div> <!-- / .row -->
-
-              </div>
-            </div>
-              
-          </div>
-        </div> <!-- / .row -->
+        
         <div class="row">
           <div class="col-12 col-xl-4">
 
@@ -326,208 +189,44 @@
                     
                     <!-- Title -->
                     <h4 class="card-header-title">
-                      Projects
+                      Pagos Pendientes
                     </h4>
 
                   </div>
                   <div class="col-auto">
 
                     <!-- Link -->
-                    <a href="#!" class="small">View all</a>
+                    <a href="#!" class="small">Pagos</a>
                     
                   </div>
                 </div> <!-- / .row -->
               </div>
               <div class="card-body">
 
+                @foreach($pagos as $key => $pago)
                 <div class="row align-items-center">
-                  <div class="col-auto">
-                    
-                    <!-- Avatar -->
-                    <a href="project-overview.html" class="avatar avatar-4by3">
-                      <img src="{{ asset('assets/img/avatars/projects/project-1.jpg')}}" alt="..." class="avatar-img rounded">
-                    </a>
 
-                  </div>
                   <div class="col ml--2">
 
                     <!-- Title -->
                     <h4 class="card-title mb-1">
-                      <a href="project-overview.html">Homepage Redesign</a>
+                      {{ title_case($pago->user->primer_nombre) }} {{ title_case($pago->user->primer_apellido) }}
                     </h4>
 
                     <!-- Time -->
                     <p class="card-text small text-muted">
-                      <time datetime="2018-05-24">Updated 5hr ago</time>
+                      ${{ round($pago->por_pagar) }}
                     </p>
                     
                   </div>
-                  <div class="col-auto">
-                    
-                    <!-- Dropdown -->
-                    <div class="dropdown">
-                      <a href="#!" class="dropdown-ellipses dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-boundary="window">
-                        <i class="fe fe-more-vertical"></i>
-                      </a>
-                      <div class="dropdown-menu dropdown-menu-right">
-                        <a href="#!" class="dropdown-item">
-                          Action
-                        </a>
-                        <a href="#!" class="dropdown-item">
-                          Another action
-                        </a>
-                        <a href="#!" class="dropdown-item">
-                          Something else here
-                        </a>
-                      </div>
-                    </div>
-                    
-                  </div>
+                  
                 </div> <!-- / .row -->
 
                 <!-- Divider -->
                 <hr>
+                @break($key == 3)
+                @endforeach
 
-                <div class="row align-items-center">
-                  <div class="col-auto">
-                    
-                    <!-- Avatar -->
-                    <a href="project-overview.html" class="avatar avatar-4by3">
-                      <img src="{{ asset('assets/img/avatars/projects/project-2.jpg')}}" alt="..." class="avatar-img rounded">
-                    </a>
-
-                  </div>
-                  <div class="col ml--2">
-
-                    <!-- Title -->
-                    <h4 class="card-title mb-1">
-                      <a href="project-overview.html">Travels & Time</a>
-                    </h4>
-
-                    <!-- Time -->
-                    <p class="card-text small text-muted">
-                      <time datetime="2018-05-24">Updated 3hr ago</time>
-                    </p>
-                    
-                  </div>
-                  <div class="col-auto">
-                    
-                    <!-- Dropdown -->
-                    <div class="dropdown">
-                      <a href="#!" class="dropdown-ellipses dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-boundary="window">
-                        <i class="fe fe-more-vertical"></i>
-                      </a>
-                      <div class="dropdown-menu dropdown-menu-right">
-                        <a href="#!" class="dropdown-item">
-                          Action
-                        </a>
-                        <a href="#!" class="dropdown-item">
-                          Another action
-                        </a>
-                        <a href="#!" class="dropdown-item">
-                          Something else here
-                        </a>
-                      </div>
-                    </div>
-                    
-                  </div>
-                </div> <!-- / .row -->
-
-                <!-- Divider -->
-                <hr>
-
-                <div class="row align-items-center">
-                  <div class="col-auto">
-                    
-                    <!-- Avatar -->
-                    <a href="project-overview.html" class="avatar avatar-4by3">
-                      <img src="{{ asset('assets/img/avatars/projects/project-3.jpg')}}" alt="..." class="avatar-img rounded">
-                    </a>
-
-                  </div>
-                  <div class="col ml--2">
-
-                    <!-- Title -->
-                    <h4 class="card-title mb-1">
-                      <a href="project-overview.html">Safari Exploration</a>
-                    </h4>
-
-                    <!-- Time -->
-                    <p class="card-text small text-muted">
-                      <time datetime="2018-05-24">Updated 10hr ago</time>
-                    </p>
-                    
-                  </div>
-                  <div class="col-auto">
-                    
-                    <!-- Dropdown -->
-                    <div class="dropdown">
-                      <a href="#!" class="dropdown-ellipses dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-boundary="window">
-                        <i class="fe fe-more-vertical"></i>
-                      </a>
-                      <div class="dropdown-menu dropdown-menu-right">
-                        <a href="#!" class="dropdown-item">
-                          Action
-                        </a>
-                        <a href="#!" class="dropdown-item">
-                          Another action
-                        </a>
-                        <a href="#!" class="dropdown-item">
-                          Something else here
-                        </a>
-                      </div>
-                    </div>
-                    
-                  </div>
-                </div> <!-- / .row -->
-
-                <!-- Divider -->
-                <hr>
-
-                <div class="row align-items-center">
-                  <div class="col-auto">
-                    
-                    <!-- Avatar -->
-                    <a href="project-overview.html" class="avatar avatar-4by3">
-                      <img src="{{ asset('assets/img/avatars/projects/project-5.jpg')}}" alt="..." class="avatar-img rounded">
-                    </a>
-
-                  </div>
-                  <div class="col ml--2">
-
-                    <!-- Title -->
-                    <h4 class="card-title mb-1">
-                      <a href="project-overview.html">Personal Site</a>
-                    </h4>
-
-                    <!-- Time -->
-                    <p class="card-text small text-muted">
-                      <time datetime="2018-05-24">Updated 4hr ago</time>
-                    </p>
-                    
-                  </div>
-                  <div class="col-auto">
-                    
-                    <!-- Dropdown -->
-                    <div class="dropdown">
-                      <a href="#!" class="dropdown-ellipses dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-boundary="window">
-                        <i class="fe fe-more-vertical"></i>
-                      </a>
-                      <div class="dropdown-menu dropdown-menu-right">
-                        <a href="#!" class="dropdown-item">
-                          Action
-                        </a>
-                        <a href="#!" class="dropdown-item">
-                          Another action
-                        </a>
-                        <a href="#!" class="dropdown-item">
-                          Something else here
-                        </a>
-                      </div>
-                    </div>
-                    
-                  </div>
-                </div> <!-- / .row -->
 
               </div> <!-- / .card-body -->
             </div> <!-- / .card -->            
@@ -543,18 +242,11 @@
 
                     <!-- Title -->
                     <h4 class="card-header-title">
-                      Goals
+                      Créditos
                     </h4>
 
                   </div>
-                  <div class="col-auto">
-
-                    <!-- Button -->
-                    <a href="#!" class="btn btn-sm btn-white">
-                      Export
-                    </a>
-                    
-                  </div>
+                  
                 </div> <!-- / .row -->
               </div>
               <div class="table-responsive mb-0" data-toggle="lists" data-lists-values='["goal-project", "goal-status", "goal-progress", "goal-date"]'>
@@ -563,259 +255,65 @@
                     <tr>
                       <th>
                         <a href="#" class="text-muted sort" data-sort="goal-project">
-                          Goal
+                          Usuario
                         </a>
                       </th>
                       <th>
                         <a href="#" class="text-muted sort" data-sort="goal-status">
-                          Status
+                          Email
                         </a>
                       </th>
                       <th>
                         <a href="#" class="text-muted sort" data-sort="goal-progress">
-                          Progress
+                          Monto
                         </a>
                       </th>
                       <th>
                         <a href="#" class="text-muted sort" data-sort="goal-date">
-                          Due date
+                          Estatus
                         </a>
-                      </th>
-                      <th class="text-right">
-                        Team
                       </th>
                       <th></th>
                     </tr>
                   </thead>
                   <tbody class="list">
+                    @foreach($creditosAll as $key => $credito)
                     <tr>
                       <td class="goal-project">
-                        Update the API
+                        {{ title_case($credito->user->primer_nombre) }} {{ title_case($credito->user->primer_apellido) }}
                       </td>
                       <td class="goal-status">
-                        <span class="text-warning">●</span> In progress
+                        {{ $credito->user->email }}
                       </td>
                       <td class="goal-progress">
-                        55%
+                        ${{ round($credito->monto) }}
                       </td>
                       <td class="goal-date">
-                        <time datetime="2018-10-24">07/24/18</time>
+                        {!! $credito->estatusCredito($credito->estatus) !!}
                       </td>
-                      <td class="text-right">
-                        <div class="avatar-group">
-                          <a href="profile-posts.html" class="avatar avatar-xs" data-toggle="tooltip" title="Dianna Smiley">
-                            <img src="{{ asset('assets/img/avatars/profiles/avatar-1.jpg')}}" class="avatar-img rounded-circle" alt="...">
-                          </a>
-                          <a href="profile-posts.html" class="avatar avatar-xs" data-toggle="tooltip" title="Ab Hadley">
-                            <img src="{{ asset('assets/img/avatars/profiles/avatar-2.jpg')}}" class="avatar-img rounded-circle" alt="...">
-                          </a>
-                          <a href="profile-posts.html" class="avatar avatar-xs" data-toggle="tooltip" title="Adolfo Hess">
-                            <img src="{{ asset('assets/img/avatars/profiles/avatar-3.jpg')}}" class="avatar-img rounded-circle" alt="...">
-                          </a>
-                          <a href="profile-posts.html" class="avatar avatar-xs" data-toggle="tooltip" title="Daniela Dewitt">
-                            <img src="{{ asset('assets/img/avatars/profiles/avatar-4.jpg')}}" class="avatar-img rounded-circle" alt="...">
-                          </a>
-                        </div>
-                      </td>
+                      
                       <td class="text-right">
                         <div class="dropdown">
                           <a href="#!" class="dropdown-ellipses dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-boundary="window">
                             <i class="fe fe-more-vertical"></i>
                           </a>
                           <div class="dropdown-menu dropdown-menu-right">
-                            <a href="#!" class="dropdown-item">
-                              Action
+                            <a href="{{ route('admin.aprobar.credito' , [$credito->id]) }}" class="dropdown-item">
+                              Aprobar
                             </a>
-                            <a href="#!" class="dropdown-item">
-                              Another action
+                            <a href="{{ route('admin.negar.credito' , [$credito->id]) }}" class="dropdown-item">
+                              Negar
                             </a>
-                            <a href="#!" class="dropdown-item">
-                              Something else here
+                            <a href="{{ route('admin.ver.credito' , [$credito->id]) }}" class="dropdown-item">
+                              Más Detalles
                             </a>
+                            
                           </div>
                         </div>
                       </td>
                     </tr>
-                    <tr>
-                      <td class="goal-project">
-                        Release v1.2-Beta
-                      </td>
-                      <td class="goal-status">
-                        <span class="text-warning">●</span> In progress
-                      </td>
-                      <td class="goal-progress">
-                        25%
-                      </td>
-                      <td class="goal-date">
-                        <time datetime="2018-10-24">08/26/18</time>
-                      </td>
-                      <td class="text-right">
-                        <div class="avatar-group justify-content-end">
-                          <a href="#!" class="avatar avatar-xs" data-toggle="tooltip" title="Dianna Smiley">
-                            <img src="{{ asset('assets/img/avatars/profiles/avatar-1.jpg')}}" class="avatar-img rounded-circle" alt="...">
-                          </a>
-                          <a href="#!" class="avatar avatar-xs" data-toggle="tooltip" title="Ab Hadley">
-                            <img src="{{ asset('assets/img/avatars/profiles/avatar-2.jpg')}}" class="avatar-img rounded-circle" alt="...">
-                          </a>
-                          <a href="#!" class="avatar avatar-xs" data-toggle="tooltip" title="Adolfo Hess">
-                            <img src="{{ asset('assets/img/avatars/profiles/avatar-3.jpg')}}" class="avatar-img rounded-circle" alt="...">
-                          </a>
-                        </div>
-                      </td>
-                      <td class="text-right">
-                        <div class="dropdown">
-                          <a href="#!" class="dropdown-ellipses dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-boundary="window">
-                            <i class="fe fe-more-vertical"></i>
-                          </a>
-                          <div class="dropdown-menu dropdown-menu-right">
-                            <a href="#!" class="dropdown-item">
-                              Action
-                            </a>
-                            <a href="#!" class="dropdown-item">
-                              Another action
-                            </a>
-                            <a href="#!" class="dropdown-item">
-                              Something else here
-                            </a>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="goal-project">
-                        GDPR Compliance
-                      </td>
-                      <td class="goal-status">
-                        <span class="text-success">●</span> Completed
-                      </td>
-                      <td class="goal-progress">
-                        100%
-                      </td>
-                      <td class="goal-date">
-                        <time datetime="2018-10-24">06/19/18</time>
-                      </td>
-                      <td class="text-right">
-                        <div class="avatar-group justify-content-end">
-                          <a href="#!" class="avatar avatar-xs" data-toggle="tooltip" title="Dianna Smiley">
-                            <img src="{{ asset('assets/img/avatars/profiles/avatar-1.jpg')}}" class="avatar-img rounded-circle" alt="...">
-                          </a>
-                          <a href="#!" class="avatar avatar-xs" data-toggle="tooltip" title="Ab Hadley">
-                            <img src="{{ asset('assets/img/avatars/profiles/avatar-2.jpg')}}" class="avatar-img rounded-circle" alt="...">
-                          </a>
-                          <a href="#!" class="avatar avatar-xs" data-toggle="tooltip" title="Adolfo Hess">
-                            <img src="{{ asset('assets/img/avatars/profiles/avatar-3.jpg')}}" class="avatar-img rounded-circle" alt="...">
-                          </a>
-                        </div>
-                      </td>
-                      <td class="text-right">
-                        <div class="dropdown">
-                          <a href="#!" class="dropdown-ellipses dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-boundary="window">
-                            <i class="fe fe-more-vertical"></i>
-                          </a>
-                          <div class="dropdown-menu dropdown-menu-right">
-                            <a href="#!" class="dropdown-item">
-                              Action
-                            </a>
-                            <a href="#!" class="dropdown-item">
-                              Another action
-                            </a>
-                            <a href="#!" class="dropdown-item">
-                              Something else here
-                            </a>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="goal-project">
-                        v1.2 Documentation
-                      </td>
-                      <td class="goal-status">
-                        <span class="text-danger">●</span> Cancelled
-                      </td>
-                      <td class="goal-progress">
-                        0%
-                      </td>
-                      <td class="goal-date">
-                        <time datetime="2018-10-24">06/25/18</time>
-                      </td>
-                      <td class="text-right">
-                        <div class="avatar-group justify-content-end">
-                          <a href="#!" class="avatar avatar-xs" data-toggle="tooltip" title="Dianna Smiley">
-                            <img src="{{ asset('assets/img/avatars/profiles/avatar-1.jpg')}}" class="avatar-img rounded-circle" alt="...">
-                          </a>
-                          <a href="#!" class="avatar avatar-xs" data-toggle="tooltip" title="Ab Hadley">
-                            <img src="{{ asset('assets/img/avatars/profiles/avatar-2.jpg')}}" class="avatar-img rounded-circle" alt="...">
-                          </a>
-                        </div>
-                      </td>
-                      <td class="text-right">
-                        <div class="dropdown">
-                          <a href="#!" class="dropdown-ellipses dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-boundary="window">
-                            <span class="fe fe-more-vertical"></span>
-                          </a>
-                          <div class="dropdown-menu dropdown-menu-right">
-                            <a href="#!" class="dropdown-item">
-                              Action
-                            </a>
-                            <a href="#!" class="dropdown-item">
-                              Another action
-                            </a>
-                            <a href="#!" class="dropdown-item">
-                              Something else here
-                            </a>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="goal-project">
-                        Plan design offsite
-                      </td>
-                      <td class="goal-status">
-                        <span class="text-success">●</span> Completed
-                      </td>
-                      <td class="goal-progress">
-                        100%
-                      </td>
-                      <td class="goal-date">
-                        <time datetime="2018-10-24">06/30/18</time>
-                      </td>
-                      <td class="text-right">
-                        <div class="avatar-group justify-content-end">
-                          <a href="#!" class="avatar avatar-xs" data-toggle="tooltip" title="Dianna Smiley">
-                            <img src="{{ asset('assets/img/avatars/profiles/avatar-1.jpg')}}" class="avatar-img rounded-circle" alt="...">
-                          </a>
-                          <a href="#!" class="avatar avatar-xs" data-toggle="tooltip" title="Ab Hadley">
-                            <img src="{{ asset('assets/img/avatars/profiles/avatar-2.jpg')}}" class="avatar-img rounded-circle" alt="...">
-                          </a>
-                          <a href="#!" class="avatar avatar-xs" data-toggle="tooltip" title="Adolfo Hess">
-                            <img src="{{ asset('assets/img/avatars/profiles/avatar-3.jpg')}}" class="avatar-img rounded-circle" alt="...">
-                          </a>
-                          <a href="#!" class="avatar avatar-xs" data-toggle="tooltip" title="Daniela Dewitt">
-                            <img src="{{ asset('assets/img/avatars/profiles/avatar-4.jpg')}}" class="avatar-img rounded-circle" alt="...">
-                          </a>
-                        </div>
-                      </td>
-                      <td class="text-right">
-                        <div class="dropdown">
-                          <a href="#!" class="dropdown-ellipses dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-boundary="window">
-                            <i class="fe fe-more-vertical"></i>
-                          </a>
-                          <div class="dropdown-menu dropdown-menu-right">
-                            <a href="#!" class="dropdown-item">
-                              Action
-                            </a>
-                            <a href="#!" class="dropdown-item">
-                              Another action
-                            </a>
-                            <a href="#!" class="dropdown-item">
-                              Something else here
-                            </a>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
+                    @break($key == 4)
+                    @endforeach
                   </tbody>
                 </table>
               </div>

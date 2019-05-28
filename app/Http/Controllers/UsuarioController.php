@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Credito;
+use App\User;
 use App\Mensaje;
 
 class UsuarioController extends Controller
@@ -19,6 +20,14 @@ class UsuarioController extends Controller
     	$creditos = Auth::user()->creditos;
 
     	return view('dash.creditos' , compact('creditos'));
+    }
+
+    public function usuarios()
+    {
+        $userRef = new User();
+        $users = $userRef->where('registro_id' , Auth::user()->id)->get();
+
+        return view('dash.usuarios' , compact('users'));
     }
 
     public function verCredito($id)

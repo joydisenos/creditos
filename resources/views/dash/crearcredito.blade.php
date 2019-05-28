@@ -71,10 +71,11 @@
                       Seleccionar Usuario <span class="text-danger">*</span>
                     </label>
 
-                    <select name="user_id" class="form-control" data-toggle="select" required>
+                    <select name="user_id" class="form-control" data-toggle="select" id="usuario_seleccionado" required>
                     		<option value="">Seleccione un Usuario</option>
                     		@foreach($users as $user)
-                          <option value="{{ $user->id }}">{{ title_case($user->primer_nombre) }} {{ title_case($user->primer_apellido) }}</option>
+                          <option value="{{ $user->id }}"
+                            data-limite="{{ $user->limite_credito }}">{{ title_case($user->primer_nombre) }} {{ title_case($user->primer_apellido) }}</option>
                         @endforeach
                     	</select>
 
@@ -185,6 +186,7 @@
                 <div class="col-12">
 
                   <div class="text-right">
+                    <h5>Observaciones: <span id="observaciones"></span></h5>
                     <h5>Subtotal: $<span id="subtotal">0</span></h5>
                     <h5>Comisión: $<span id="comision">0</span></h5>
                     <h5>Costo Administrativo: $<span id="administrativo">0</span></h5>
@@ -309,6 +311,20 @@
         admin = 10000;
 
         total = Math.round(precio + comision + admin);
+
+        limiteUsuario = $('#usuario_seleccionado option:selected').data('limite');
+    
+        if(parseFloat(total) > parseFloat(limiteUsuario))
+        {
+          totalAntiguo = total;
+          total = limiteUsuario;
+          comision = Math.round((total / 1.35));
+          excedente = parseFloat(precio) - parseFloat(comision) - parseFloat(admin);
+
+          $('#observaciones').html('El usuario ha excedido su límite de crédito, para continuar debe cancelar al almacén la cantidad de $' + excedente);
+        }else{
+          $('#observaciones').html()
+        }
         
         $('#subtotal').html(precio);
         $('#por_pagar').val(precio);

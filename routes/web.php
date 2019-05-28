@@ -25,6 +25,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 		
 		Route::get('/mensajes', 'UsuarioController@mensajes')->name('usuario.mensajes');
 		Route::get('/ver/{id}/mensaje', 'UsuarioController@verMensaje')->name('usuario.ver.mensaje');
+
+		Route::get('/usuarios', 'UsuarioController@usuarios')->name('usuario.usuarios');
 	});
 
 	//Admin
@@ -42,10 +44,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 		Route::get('/crear/credito', 'AdminController@crearCredito')->name('admin.crear.credito');
 		Route::post('/crear/credito', 'AdminController@crearNuevoCredito')->name('admin.crear.nuevo.credito');
 		Route::get('/ver/credito/{id}', 'AdminController@verCredito')->name('admin.ver.credito');
+		Route::get('/aprobar/credito/{id}', 'AdminController@aprobarCredito')->name('admin.aprobar.credito');
+		Route::get('/negar/credito/{id}', 'AdminController@negarCredito')->name('admin.negar.credito');
 
 		Route::get('/enviar/mensaje', 'AdminController@enviarMensaje')->name('admin.enviar.mensaje');
 		Route::post('/enviar/nuevo/mensaje', 'AdminController@enviarNuevoMensaje')->name('admin.enviar.nuevo.mensaje');
 
 		Route::get('/pagos', 'AdminController@pagos')->name('admin.ver.pagos');
+		Route::get('/marcar/pago/{id}', 'AdminController@marcarPago')->name('admin.marcar.pago');
 	
 	});

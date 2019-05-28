@@ -61,7 +61,7 @@
                   <!-- Last name -->
                   <div class="form-group">
 
-                    ${{ $credito->monto }}
+                    Total crédito: <strong>${{ $credito->monto }}</strong>
 
                   </div>
 
@@ -70,7 +70,34 @@
                 
                 
               </div> <!-- / .row -->
+               @if(is_array($productos))
+                    @if(count($productos) > 0)
+                    <div class="row"> 
+                      <div class="col">
+                        <h3>Productos Adquiridos</h3>
+                      </div>
+                    </div>
+                    @endif
+                  
 
+                 @foreach($productos as $producto)
+                <div class="row">
+                  <div class="col">
+                    
+                  <h5>{{ $producto[0] }}</h5>
+                      
+                    
+                  </div>
+
+                  <div class="col">
+                    
+               
+                      <h5>Valor: ${{ $producto[1] }}</h5>
+                    
+                  </div>
+                </div>
+                @endforeach
+              @endif
               <!-- Divider -->
               <hr class="mt-4 mb-5">
 

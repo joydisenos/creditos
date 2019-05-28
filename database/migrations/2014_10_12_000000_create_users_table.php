@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('segundo_nombre')->nullable();
             $table->string('primer_apellido');
             $table->string('segundo_apellido')->nullable();
+            $table->string('nombre_almacen')->nullable();
 
             $table->integer('tipo_documento');
             $table->string('numero_documento');
@@ -31,7 +32,7 @@ class CreateUsersTable extends Migration
 
             $table->integer('personas_cargo')->nullable();
             $table->integer('tipo_vivienda')->nullable();
-            $table->float('limite_credito')->nullable();
+            $table->float('limite_credito' , 20 , 2 )->nullable();
 
             $table->string('telefono_fijo')->nullable();
             $table->string('telefono_celular')->nullable();

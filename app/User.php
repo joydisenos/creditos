@@ -22,6 +22,7 @@ class User extends Authenticatable
         'segundo_nombre',
         'primer_apellido',
         'segundo_apellido',
+        'nombre_almacen',
         'foto',
         'tipo_documento',
         'numero_documento',
@@ -93,5 +94,10 @@ class User extends Authenticatable
     public function validadoPor()
     {
         return $this->belongsTo(User::class , 'validado_id');
+    }
+
+    public function registradoPor()
+    {
+        return $this->belongsTo(User::class , 'registro_id');
     }
 }
