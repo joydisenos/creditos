@@ -43,6 +43,42 @@ class CreateUsersTable extends Migration
             $table->string('barrio')->nullable();
             $table->string('direccion')->nullable();
 
+            //Referencias
+            $table->string('referencia_ocupacion')->nullable();
+            $table->string('referencia_ingresos')->nullable();
+            $table->string('referencia_nombre_empresa')->nullable();
+            $table->string('referencia_telefono_empresa')->nullable();
+            $table->string('referencia_extension_empresa')->nullable();
+            $table->text('referencia_direccion_empresa')->nullable();
+            $table->string('referencia_sucursal_empresa')->nullable();
+            $table->string('referencia_telefono_sucursal_empresa')->nullable();
+            $table->string('referencia_cargo_empresa')->nullable();
+            $table->string('referencia_tiempo_empresa')->nullable();
+
+            //Referencia Personal 1
+            $table->string('referencia_personal1_primer_nombre')->nullable();
+            $table->string('referencia_personal1_segundo_nombre')->nullable();
+            $table->string('referencia_personal1_primer_apellido')->nullable();
+            $table->string('referencia_personal1_segundo_apellido')->nullable();
+            $table->text('referencia_personal1_direccion')->nullable();
+            $table->string('referencia_personal1_telefono_casa')->nullable();
+            $table->string('referencia_personal1_telefono_celular')->nullable();
+            $table->string('referencia_personal1_parentesco')->nullable();
+            $table->string('referencia_personal1_telefono_laboral')->nullable();
+
+            //Referencia Personal 2
+            
+            $table->string('referencia_personal2_primer_nombre')->nullable();
+            $table->string('referencia_personal2_segundo_nombre')->nullable();
+            $table->string('referencia_personal2_primer_apellido')->nullable();
+            $table->string('referencia_personal2_segundo_apellido')->nullable();
+            $table->text('referencia_personal2_direccion')->nullable();
+            $table->string('referencia_personal2_telefono_casa')->nullable();
+            $table->string('referencia_personal2_telefono_celular')->nullable();
+            $table->string('referencia_personal2_parentesco')->nullable();
+            $table->string('referencia_personal2_telefono_laboral')->nullable();
+
+
             $table->integer('registro_id')->nullable();
             $table->integer('validado_id')->nullable();
 

@@ -20,6 +20,40 @@
                   </div>
                 </div> <!-- / .row -->
 
+                 <!-- Nav -->
+
+                
+                <div class="row align-items-center">
+                  <div class="col">
+                    
+                    <ul class="nav nav-tabs nav-overflow header-tabs">
+                      <li class="nav-item">
+                        <a href="#!" data-target=".datos-basicos" class="tab-usuario nav-link active">
+                          Datos Básicos
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="#!" data-target=".datos-laborales" class="tab-usuario nav-link">
+                          Datos Laborales
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="#!" data-target=".documentos" class="tab-usuario nav-link">
+                          Documentos
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="#!" data-target=".creditos" class="tab-usuario nav-link">
+                          Créditos
+                        </a>
+                      </li>
+                      
+                    </ul>
+
+                  </div>
+                </div>
+            
+
             
               </div>
             </div>
@@ -27,8 +61,11 @@
             @include('includes.errors')
 
             <!-- Form -->
+
+            
+            <div class="datos-basicos ocultar">
             <form class="mb-4" action="{{ route('admin.actualizar.usuario' , [$user->id]) }}" method="post">
-            	@csrf
+              @csrf
 
               <div class="row">
                 <div class="col-12 col-md-6">
@@ -466,6 +503,7 @@
                     </div>
                 </div>
               </div>
+
               <!-- Divider -->
               <hr class="mt-4 mb-5">
 
@@ -483,4 +521,609 @@
               </div> <!-- / .row -->
 
             </form>
+             
+            </div>
+
+            <div class="datos-laborales ocultar" style="display:none">
+              
+               <div class="row">
+                  
+                  
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Ocupación
+                          </label>
+
+                         <select name="referencia_ocupacion" class="form-control">
+                           <option {{ $user->referencia_ocupacion == 'Empleado'? 'selected' : '' }} value="Empleado">Empleado</option>
+                           <option {{ $user->referencia_ocupacion == 'Independiente'? 'selected' : '' }} value="Independiente">Independiente</option>
+                           <option {{ $user->referencia_ocupacion == 'Estudiante'? 'selected' : '' }} value="Estudiante">Estudiante</option>
+                           <option {{ $user->referencia_ocupacion == 'Jubilado'? 'selected' : '' }} value="Jubilado">Jubilado</option>
+                           <option {{ $user->referencia_ocupacion == 'Ama de Casa'? 'selected' : '' }} value="Ama de Casa">Ama de Casa</option>
+                           <option {{ $user->referencia_ocupacion == 'Otro'? 'selected' : '' }} value="Otro">Otro</option>
+                         </select>
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Ingresos Mensuales
+                          </label>
+
+                         <select name="referencia_ingresos" class="form-control">
+                           <option {{$user->referencia_ingresos == 'Menos de 600' ? 'selected' : ''}} value="Menos de 600">Menos de 600</option>
+                           <option {{$user->referencia_ingresos == '601 a 1.200' ? 'selected' : ''}} value="601 a 1.200">601 a 1.200</option>
+                           <option {{$user->referencia_ingresos == '1.201 a 2.000' ? 'selected' : ''}} value="1.201 a 2.000">1.201 a 2.000</option>
+                           <option {{$user->referencia_ingresos == '2.001 a 3.000' ? 'selected' : ''}} value="2.001 a 3.000">2.001 a 3.000</option>
+                           <option {{$user->referencia_ingresos == 'mas de 3.000' ? 'selected' : ''}} value="mas de 3.000">mas de 3.000</option>
+                         </select>
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Nombre de Empresa
+                          </label>
+
+                         <input type="text" name="referencia_nombre_empresa" value="{{$user->referencia_nombre_empresa}}" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Teléfono de la oficina
+                          </label>
+
+                         <input type="text" name="referencia_telefono_empresa" value="{{ $user->referencia_telefono_empresa }}" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Extensión Telefónica
+                          </label>
+
+                         <input type="text" name="referencia_extension_empresa" value="{{ $user->referencia_extension_empresa }}" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Dirección
+                          </label>
+
+                         <input type="text" name="referencia_direccion_empresa" value="{{ $user->referencia_direccion_empresa }}" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Sucursal
+                          </label>
+
+                         <input type="text" name="referencia_sucursal_empresa" value="{{ $user->referencia_sucursal_empresa }}" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Teléfono de Sucursal
+                          </label>
+
+                         <input type="text" name="referencia_telefono_sucursal_empresa" value="{{ $user->referencia_telefono_sucursal_empresa }}" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Cargo desempeñado
+                          </label>
+
+                         <input type="text" name="referencia_cargo_empresa" value="{{ $user->referencia_cargo_empresa }}" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Tiempo de Servicio
+                          </label>
+
+                         <input type="text" name="referencia_tiempo_empresa" value="{{ $user->referencia_tiempo_empresa }}" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 text-center mt-3 mb-3">
+                    <h2>Referencias Personales</h2>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Primer Nombre
+                          </label>
+
+                         <input type="text" name="referencia_personal1_primer_nombre" value="{{ $user->referencia_personal1_primer_nombre }}" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Segundo Nombre
+                          </label>
+
+                         <input type="text" name="referencia_personal1_segundo_nombre" value="{{ $user->referencia_personal1_segundo_nombre }}" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Primer Apellido
+                          </label>
+
+                         <input type="text" name="referencia_personal1_primer_apellido" value="{{ $user->referencia_personal1_primer_apellido }}" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Segundo Apellido
+                          </label>
+
+                         <input type="text" name="referencia_personal1_segundo_apellido" value="{{ $user->referencia_personal1_segundo_apellido }}" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Dirección
+                          </label>
+
+                         <input type="text" name="referencia_personal1_direccion" value="{{ $user->referencia_personal1_direccion }}" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Teléfono de casa
+                          </label>
+
+                         <input type="text" name="referencia_personal1_telefono_casa" value="{{ $user->referencia_personal1_telefono_casa }}" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Teléfono celular
+                          </label>
+
+                         <input type="text" name="referencia_personal1_telefono_celular" value="{{ $user->referencia_personal1_telefono_celular }}" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Teléfono oficina
+                          </label>
+
+                         <input type="text" name="referencia_personal1_telefono_laboral" value="{{ $user->referencia_personal1_telefono_laboral }}" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Parentesco
+                          </label>
+
+                         <input type="text" name="referencia_personal1_parentesco" value="{{ $user->referencia_personal1_parentesco }}" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 text-center mt-3 mb-3">
+                    <h2>Segunda Referencia Personal</h2>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Primer Nombre
+                          </label>
+
+                         <input type="text" name="referencia_personal2_primer_nombre" value="{{ $user->referencia_personal2_primer_nombre }}" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Segundo Nombre
+                          </label>
+
+                         <input type="text" name="referencia_personal2_segundo_nombre" value="{{ $user->referencia_personal2_segundo_nombre }}" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Primer Apellido
+                          </label>
+
+                         <input type="text" name="referencia_personal2_primer_apellido" value="{{ $user->referencia_personal2_primer_apellido }}" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Segundo Apellido
+                          </label>
+
+                         <input type="text" name="referencia_personal2_segundo_apellido" value="{{ $user->referencia_personal2_segundo_apellido }}" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Dirección
+                          </label>
+
+                         <input type="text" name="referencia_personal2_direccion" value="{{ $user->referencia_personal2_direccion }}" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Teléfono de casa
+                          </label>
+
+                         <input type="text" name="referencia_personal2_telefono_casa" value="{{ $user->referencia_personal2_telefono_casa }}" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Teléfono celular
+                          </label>
+
+                         <input type="text" name="referencia_personal2_telefono_celular" value="{{ $user->referencia_personal2_telefono_celular }}" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Teléfono oficina
+                          </label>
+
+                         <input type="text" name="referencia_personal2_telefono_laboral" value="{{ $user->referencia_personal2_telefono_laboral }}" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Parentesco
+                          </label>
+
+                         <input type="text" name="referencia_personal2_parentesco" value="{{ $user->referencia_personal2_parentesco }}" class="form-control">
+
+                        </div>
+                  </div>
+
+
+
+                </div>
+
+            </div>
+
+
+
+            
+
+            <div class="documentos ocultar">
+              
+              
+              <div class="row justify-content-center">
+                @if($user->foto != null)
+                <div class="col-12 col-md-4 text-center">
+                  <h3>Foto Cliente</h3>
+                  <img src="{{ asset('storage/archivos/' . $user->id . '/' . $user->foto) }}" class="img-fluid" alt="Foto">
+                </div>
+                 @endif
+
+                 @foreach($user->documentos as $documento)
+                 <div class="col-12 col-md-4 text-center">
+                  <h3>{{ $documento->nombre }}</h3>
+                  <img src="{{ asset('storage/archivos/' . $user->id . '/' . $documento->ruta) }}" class="img-fluid" alt="Foto">
+                </div>
+                 @endforeach
+              </div>
+             
+
+            </div>
+            <div class="creditos ocultar" style="display:none">
+
+
+
+
+
+              <!-- Card -->
+            <div class="card" data-toggle="lists" data-lists-values='["orders-id","orders-order", "orders-product", "orders-date", "orders-total", "orders-status", "orders-method"]'>
+              <div class="card-header">
+                <div class="row align-items-center">
+                  <div class="col">
+
+                    <!-- Search -->
+                    <form class="row align-items-center">
+                      <div class="col-auto pr-0">
+                        <span class="fe fe-search text-muted"></span>
+                      </div>
+                      <div class="col">
+                          <input type="search" class="form-control form-control-flush search" placeholder="Buscar">
+                      </div>
+                    </form>
+                    
+                  </div>
+                  <div class="col-auto">
+                    
+                    <!-- Button 
+
+                    <div class="dropdown">
+                      <button class="btn btn-sm btn-white dropdown-toggle" type="button" id="bulkActionDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Acción
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="bulkActionDropdown">
+                        <a class="dropdown-item" href="#!">Acción</a>
+                        <a class="dropdown-item" href="#!">Acción</a>
+                        <a class="dropdown-item" href="#!">Acción</a>
+                      </div>
+                    </div>-->
+
+                  </div>
+                </div> <!-- / .row -->
+              </div>
+              <div class="table-responsive">
+                <table class="table table-sm table-nowrap card-table">
+                  <thead>
+                    <tr>
+                      <!--<th>
+                        <div class="custom-control custom-checkbox table-checkbox">
+                          <input type="checkbox" class="custom-control-input" name="ordersSelect" id="ordersSelectAll">
+                          <label class="custom-control-label" for="ordersSelectAll">
+                            &nbsp;
+                          </label>
+                        </div>
+                      </th>-->
+                      <th>
+                        <a href="#" class="text-muted sort" data-sort="orders-id">
+                          Número
+                        </a>
+                      </th>
+                      <th>
+                        <a href="#" class="text-muted sort" data-sort="orders-order">
+                          Nombre
+                        </a>
+                      </th>
+                      <th>
+                        <a href="#" class="text-muted sort" data-sort="orders-product">
+                          Email
+                        </a>
+                      </th>
+                      @role('admin|agente|dev')
+                      <th>
+                        <a href="#" class="text-muted sort" data-sort="almacen">
+                          Almacén
+                        </a>
+                      </th>
+                      @endrole
+                      <th>
+                        <a href="#" class="text-muted sort" data-sort="orders-date">
+                          Monto
+                        </a>
+                      </th>
+                      <th>
+                        <a href="#" class="text-muted sort" data-sort="orders-total">
+                          Cuotas
+                        </a>
+                      </th>
+                      <th>
+                        <a href="#" class="text-muted sort" data-sort="orders-status">
+                          Tasa
+                        </a>
+                      </th>
+                      <th colspan="2">
+                        <a href="#" class="text-muted sort" data-sort="orders-method">
+                          Estatus
+                        </a>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="list">
+                    @foreach($user->creditos as $credito)
+                    <tr>
+                      <!--<td>
+                        <div class="custom-control custom-checkbox table-checkbox">
+                          <input type="checkbox" class="custom-control-input" name="ordersSelect" id="ordersSelect{{$credito->id}}">
+                          <label class="custom-control-label" for="ordersSelect{{$credito->id}}">
+                            &nbsp;
+                          </label>
+                        </div>
+                      </td>-->
+                      <td class="orders-id">
+                        {{ $credito->id }}
+                      </td>
+                      <td class="orders-order">
+                        {{ title_case($credito->user->primer_nombre) }} {{ title_case($credito->user->primer_apellido) }}
+                      </td>
+                      <td class="orders-product">
+                        {{ $credito->user->email }}
+                      </td>
+
+                      @role('admin|agente|dev')
+                      <td class="orders-product">
+                        {{ ($credito->almacen)? $credito->almacen->nombre_almacen : 'No Suministrado' }}
+                      </td>
+                      @endrole
+
+                      <td class="orders-date">
+                        ${{ $credito->monto }}
+                      </td>
+                      <td class="orders-total">
+                        {{ $credito->cuotas }}
+                      </td>
+                      <td class="orders-status">
+                        {{ $credito->interes }}
+                        <!--<div class="badge badge-soft-success">
+                          Shipped
+                        </div>-->
+                      </td>
+                      <td class="orders-method">
+                        {!! $credito->estatusCredito($credito->estatus) !!}
+                      </td>
+                      <td class="text-right">
+                        <div class="dropdown">
+                          <a href="#!" class="dropdown-ellipses dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-boundary="window">
+                            <i class="fe fe-more-vertical"></i>
+                          </a>
+                          <div class="dropdown-menu dropdown-menu-right">
+                            @role('admin|agente|dev')
+                            <a href="{{ route('admin.aprobar.credito' , [$credito->id]) }}" class="dropdown-item">
+                              Aprobar
+                            </a>
+                            <a href="{{ route('admin.negar.credito' , [$credito->id]) }}" class="dropdown-item">
+                              Negar
+                            </a>
+                            @endrole
+                            <a href="{{ route('admin.ver.credito' , [$credito->id]) }}" class="dropdown-item">
+                              Más Detalles
+                            </a>
+                            
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            </div>
+@endsection
+@section('scripts')
+<script>
+  $(document).ready(function(){
+    $('.tab-usuario').click(function(e){
+      e.preventDefault();
+      $('.tab-usuario').removeClass('active');
+      $(this).addClass('active');
+      target = $(this).data('target');
+      $('.ocultar').hide();
+      $(target).show();
+    });
+  });
+</script>
 @endsection

@@ -81,7 +81,8 @@
               @role('admin|agente|dev')
               <li><a href="{{ route('admin.creditos') }}">Creditos</a></li>
               @endrole
-
+              
+              @role('almacen|dev')
               <li><a href="{{ route('usuario.creditos') }}">Créditos</a></li>
               <li><a href="{{ route('usuario.mensajes') }}">Mensajes 
                 @if(Auth::user()->mensajesNoLeidos()->count() > 0)
@@ -89,6 +90,7 @@
                 @endif
               </a>
               </li>
+              @endrole
               <li><a href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();"

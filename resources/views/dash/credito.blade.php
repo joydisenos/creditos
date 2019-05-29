@@ -127,6 +127,12 @@
                           <th>
                             Saldo al Capital
                           </th>
+                          <th>
+                            Fecha de Pago
+                          </th>
+                          <th>
+                            Estatus
+                          </th>
                         </thead>
 
                         <tbody class="table-body">
@@ -145,6 +151,12 @@
                         	<td>
                         		${{ $cuota->saldo }}
                         	</td>
+                          <td>
+                            {{ date( 'd/m' , strtotime($cuota->fecha_pago)) }}
+                          </td>
+                          <td>
+                            {{ $cuota->estatusPago($cuota->estatus) }}
+                          </td>
                         </tr>
                         @endforeach
                         </tbody>

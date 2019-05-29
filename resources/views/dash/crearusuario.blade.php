@@ -66,7 +66,7 @@
             @include('includes.errors')
 
             <!-- Form -->
-            <form class="mb-4" action="{{ route('admin.crear.nuevo.usuario') }}" method="post">
+            <form class="mb-4" action="{{ route('admin.crear.nuevo.usuario') }}" method="post" enctype="multipart/form-data">
             	@csrf
 
               <div class="row">
@@ -521,6 +521,426 @@
 
                         </div>
                   </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Cédula (anverso)
+                          </label>
+
+                         <input type="file" name="cedulaA" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Cédula (reverso)
+                          </label>
+
+                         <input type="file" name="cedulaR" class="form-control">
+
+                        </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-12 text-center mt-3 mb-3">
+                    <h2>Datos Laborales</h2>
+                  </div>
+                  
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Ocupación
+                          </label>
+
+                         <select name="referencia_ocupacion" class="form-control">
+                           <option value="Empleado">Empleado</option>
+                           <option value="Independiente">Independiente</option>
+                           <option value="Estudiante">Estudiante</option>
+                           <option value="Jubilado">Jubilado</option>
+                           <option value="Ama de Casa">Ama de Casa</option>
+                           <option value="Otro">Otro</option>
+                         </select>
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Ingresos Mensuales
+                          </label>
+
+                         <select name="referencia_ingresos" class="form-control">
+                           <option value="Menos de 600">Menos de 600</option>
+                           <option value="601 a 1.200">601 a 1.200</option>
+                           <option value="1.201 a 2.000">1.201 a 2.000</option>
+                           <option value="2.001 a 3.000">2.001 a 3.000</option>
+                           <option value="mas de 3.000">mas de 3.000</option>
+                         </select>
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Nombre de Empresa
+                          </label>
+
+                         <input type="text" name="referencia_nombre_empresa" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Teléfono de la oficina
+                          </label>
+
+                         <input type="text" name="referencia_telefono_empresa" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Extensión Telefónica
+                          </label>
+
+                         <input type="text" name="referencia_extension_empresa" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Dirección
+                          </label>
+
+                         <input type="text" name="referencia_direccion_empresa" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Sucursal
+                          </label>
+
+                         <input type="text" name="referencia_sucursal_empresa" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Teléfono de Sucursal
+                          </label>
+
+                         <input type="text" name="referencia_telefono_sucursal_empresa" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Cargo desempeñado
+                          </label>
+
+                         <input type="text" name="referencia_cargo_empresa" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Tiempo de Servicio
+                          </label>
+
+                         <input type="text" name="referencia_tiempo_empresa" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 text-center mt-3 mb-3">
+                    <h2>Referencias Personales</h2>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Primer Nombre
+                          </label>
+
+                         <input type="text" name="referencia_personal1_primer_nombre" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Segundo Nombre
+                          </label>
+
+                         <input type="text" name="referencia_personal1_segundo_nombre" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Primer Apellido
+                          </label>
+
+                         <input type="text" name="referencia_personal1_primer_apellido" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Segundo Apellido
+                          </label>
+
+                         <input type="text" name="referencia_personal1_segundo_apellido" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Dirección
+                          </label>
+
+                         <input type="text" name="referencia_personal1_direccion" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Teléfono de casa
+                          </label>
+
+                         <input type="text" name="referencia_personal1_telefono_casa" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Teléfono celular
+                          </label>
+
+                         <input type="text" name="referencia_personal1_telefono_celular" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Teléfono oficina
+                          </label>
+
+                         <input type="text" name="referencia_personal1_telefono_laboral" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Parentesco
+                          </label>
+
+                         <input type="text" name="referencia_personal1_parentesco" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 text-center mt-3 mb-3">
+                    <h2>Segunda Referencia Personal</h2>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Primer Nombre
+                          </label>
+
+                         <input type="text" name="referencia_personal2_primer_nombre" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Segundo Nombre
+                          </label>
+
+                         <input type="text" name="referencia_personal2_segundo_nombre" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Primer Apellido
+                          </label>
+
+                         <input type="text" name="referencia_personal2_primer_apellido" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Segundo Apellido
+                          </label>
+
+                         <input type="text" name="referencia_personal2_segundo_apellido" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Dirección
+                          </label>
+
+                         <input type="text" name="referencia_personal2_direccion" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Teléfono de casa
+                          </label>
+
+                         <input type="text" name="referencia_personal2_telefono_casa" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Teléfono celular
+                          </label>
+
+                         <input type="text" name="referencia_personal2_telefono_celular" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Teléfono oficina
+                          </label>
+
+                         <input type="text" name="referencia_personal2_telefono_laboral" class="form-control">
+
+                        </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+
+                          <!-- Label -->
+                          <label>
+                            Parentesco
+                          </label>
+
+                         <input type="text" name="referencia_personal2_parentesco" class="form-control">
+
+                        </div>
+                  </div>
+
+
+
                 </div>
                 </div>
 

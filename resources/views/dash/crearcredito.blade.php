@@ -116,11 +116,11 @@
                   </div>
                 </div>
                 <div class="col-12 col-md-6">
-                  <div class="form-group">
+                  <div class="form-group producto-item">
 
                     <!-- Label -->
                     <label>
-                      Precio de Producto ($)
+                      Precio de Producto ($) <span class="precio_con_comision"></span> 
                     </label>
 
                     <!-- Input -->
@@ -255,14 +255,23 @@
   $(document).ready(function(){
 
     $('.loop-productos').on( 'change keyup', '.producto-precio , .producto-nombre' , function(){
+      precioProducto = $(this).parents('.producto-item').find('.producto-precio').val();
+      precioConComision = parseFloat(precioProducto) + (parseFloat(precioProducto) * 0.35);
+      $(this).parents('.producto-item').find('.precio_con_comision').html( '| Precio + comisión: $' + Math.round(precioConComision));
       contarPrecios();
     } );
 
     $('.producto-precio , .producto-nombre').change(function(){
+      precioProducto = $(this).parents('.producto-item').find('.producto-precio').val();
+      precioConComision = parseFloat(precioProducto) + (parseFloat(precioProducto) * 0.35);
+      $(this).parents('.producto-item').find('.precio_con_comision').html( '| Precio + comisión: $' + Math.round(precioConComision));
       contarPrecios();
     } );
 
     $('.producto-precio , .producto-nombre').keyup(function(){
+      precioProducto = $(this).parents('.producto-item').find('.producto-precio').val();
+      precioConComision = parseFloat(precioProducto) + (parseFloat(precioProducto) * 0.35);
+      $(this).parents('.producto-item').find('.precio_con_comision').html( '| Precio + comisión: $' + Math.round(precioConComision));
       contarPrecios();
     } );
 
@@ -355,7 +364,7 @@
                 <div class="col-11 col-md-5">
                   <div class="form-group">
                     <label>
-                      Precio de Producto ($)
+                      Precio de Producto ($) <span class="precio_con_comision"></span>
                     </label>
                     <input type="number" class="form-control producto-precio" value="0" name="precio[]" required>
                   </div>

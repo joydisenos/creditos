@@ -15,6 +15,11 @@ class Cuota extends Model
         'saldo'
     ];
 
+    public function credito()
+    {
+        return $this->belongsTo(Credito::class , 'credito_id');
+    }
+
     public function estadisticaPagos()
     {
     	for ($i = 0; $i < 12; $i++){
@@ -39,5 +44,26 @@ class Cuota extends Model
         }
  
         return $data;
+    }
+
+    public function estatusPago($int)
+    {
+        switch ($int) {
+            case 0:
+                return 'Pendiente';
+                break;
+
+            case 1:
+                return 'Pago';
+                break;
+
+            case 2:
+                return 'En mora';
+                break;
+            
+            default:
+                return 'no definido';
+                break;
+        }
     }
 }

@@ -124,6 +124,14 @@
               </li>
               @endrole
               
+               @role('admin|agente|dev')
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.ver.cobros') }}" role="button">
+                  <i class="fe fe-layers"></i> Cobros
+                </a>
+              </li>
+              @endrole
+              
               @role('admin|agente|dev')
               <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.enviar.mensaje') }}" role="button">
@@ -215,7 +223,11 @@
               <!-- Icon -->
               <a href="#sidebarModalActivity" class="navbar-user-link" data-toggle="modal">
                 <span class="icon">
-                  <i class="fe fe-bell"></i>
+                  <i class="fe fe-bell">
+                    @role('admin|agente|dev')
+                    <div class="badge badge-soft-danger">{{App\User::where('limite_credito' , null)->get()->count() > 0 ? App\User::where('limite_credito' , null)->get()->count() : ''}}</div>
+                    @endrole
+                  </i>
                 </span>
               </a>
 

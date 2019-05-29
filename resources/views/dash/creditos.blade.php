@@ -19,10 +19,13 @@
                   </div>
                   <div class="col-auto">
                     
+                    
+                    @role('admin|almacen|dev')
                     <!-- Button -->
                     <a href="{{ route('admin.crear.credito') }}" class="btn btn-primary">
                       Nuevo Crédito
                     </a>
+                    @endrole
                     
                   </div>
                 </div> <!-- / .row -->
@@ -69,14 +72,14 @@
                 <table class="table table-sm table-nowrap card-table">
                   <thead>
                     <tr>
-                      <th>
+                      <!--<th>
                         <div class="custom-control custom-checkbox table-checkbox">
                           <input type="checkbox" class="custom-control-input" name="ordersSelect" id="ordersSelectAll">
                           <label class="custom-control-label" for="ordersSelectAll">
                             &nbsp;
                           </label>
                         </div>
-                      </th>
+                      </th>-->
                       <th>
                         <a href="#" class="text-muted sort" data-sort="orders-id">
                           Número
@@ -124,14 +127,14 @@
                   <tbody class="list">
                   	@foreach($creditos as $credito)
                     <tr>
-                      <td>
+                      <!--<td>
                         <div class="custom-control custom-checkbox table-checkbox">
                           <input type="checkbox" class="custom-control-input" name="ordersSelect" id="ordersSelect{{$credito->id}}">
                           <label class="custom-control-label" for="ordersSelect{{$credito->id}}">
                             &nbsp;
                           </label>
                         </div>
-                      </td>
+                      </td>-->
                       <td class="orders-id">
                         {{ $credito->id }}
                       </td>

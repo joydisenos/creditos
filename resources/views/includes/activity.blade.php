@@ -6,7 +6,7 @@
 
             <!-- Title -->
             <h4 class="modal-title">
-              Notificaciones
+              Actividad
             </h4>
 
             <!-- Close -->
@@ -22,8 +22,11 @@
             <!-- List group -->
             <div class="list-group list-group-flush my--3">
               
-          
+               @if(Auth::user()->mensajesNoLeidos()->count() > 0)
+                  <h6>Mensajes no leídos</h6>
+                  @endif
               @foreach(Auth::user()->mensajesNoLeidos()  as $mensaje)
+             
               <a class="list-group-item px-0" href="{{ route('usuario.ver.mensaje' , $mensaje->id) }}">
                 <div class="row mb-2">
                   
@@ -45,6 +48,35 @@
                 </div> <!-- / .row -->
                 </a>
                 @endforeach
+
+                @role('admin|agente|dev')
+                  
+                  @if(App\User::where('limite_credito' , null)->get()->count() > 0)
+                  <h6>Solicitudes Pendientes</h6>
+                  @endif
+                  @foreach(App\User::where('limite_credito' , null)->get() as $solicitud)
+                    <a class="list-group-item px-0" href="{{ route('admin.modificar.usuario' , $solicitud->id) }}">
+                        <div class="row mb-2">
+                          
+                          <div class="col ml--2">
+                        
+                            <!-- Content -->
+                            <div class="small text-muted">
+                              <strong class="text-body">{{ title_case($solicitud->primer_nombre) }}</strong> {{ title_case($solicitud->primer_apellido) }}.
+                            </div>
+
+                          </div>
+                          <div class="col-auto">
+
+                            <small class="text-muted">
+                              {{ $solicitud->created_at->format('d/m') }}
+                            </small>
+                        
+                          </div>
+                        </div> <!-- / .row -->
+                    </a>
+                  @endforeach
+                @endrole
 
               
              

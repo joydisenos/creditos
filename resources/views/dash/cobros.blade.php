@@ -8,23 +8,19 @@
                     
                     <!-- Pretitle -->
                     <h6 class="header-pretitle">
-                      Usuarios
+                      Cobros
                     </h6>
 
                     <!-- Title -->
                     <h1 class="header-title">
-                      Usuarios Registrados
+                      Por Cobrar
                     </h1>
 
                   </div>
                   <div class="col-auto">
                     
-                    @role('admin|almacen|dev')
-                    <!-- Button -->
-                    <a href="{{ route('admin.crear.usuario') }}" class="btn btn-primary">
-                      Nuevo Usuario
-                    </a>
-                    @endrole
+                    
+                   
                     
                   </div>
                 </div> <!-- / .row -->
@@ -33,7 +29,7 @@
             </div>
 
             <!-- Card -->
-            <div class="card" data-toggle="lists" data-lists-values='["orders-order", "orders-product", "orders-registrado", "orders-date", "orders-total", "orders-status", "orders-registrado", "orders-method"]'>
+            <div class="card" data-toggle="lists" data-lists-values='["orders-id","orders-order", "orders-product", "orders-date", "orders-total", "orders-status", "orders-method"]'>
               <div class="card-header">
                 <div class="row align-items-center">
                   <div class="col">
@@ -51,7 +47,7 @@
                   </div>
                   <div class="col-auto">
                     
-                    <!-- Button -->
+                    <!-- Button 
 
                     <div class="dropdown">
                       <button class="btn btn-sm btn-white dropdown-toggle" type="button" id="bulkActionDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -62,7 +58,7 @@
                         <a class="dropdown-item" href="#!">Acción</a>
                         <a class="dropdown-item" href="#!">Acción</a>
                       </div>
-                    </div>
+                    </div>-->
 
                   </div>
                 </div> <!-- / .row -->
@@ -71,17 +67,15 @@
                 <table class="table table-sm table-nowrap card-table">
                   <thead>
                     <tr>
-                      <!--<th>
-                        <div class="custom-control custom-checkbox table-checkbox">
-                          <input type="checkbox" class="custom-control-input" name="ordersSelect" id="ordersSelectAll">
-                          <label class="custom-control-label" for="ordersSelectAll">
-                            &nbsp;
-                          </label>
-                        </div>
-                      </th>-->
+                     
+                      <th>
+                        <a href="#" class="text-muted sort" data-sort="orders-id">
+                          Crédito
+                        </a>
+                      </th>
                       <th>
                         <a href="#" class="text-muted sort" data-sort="orders-order">
-                          Nombre
+                          Nombre Cliente
                         </a>
                       </th>
                       <th>
@@ -91,75 +85,68 @@
                       </th>
                       @role('admin|agente|dev')
                       <th>
-                        <a href="#" class="text-muted sort" data-sort="orders-registrado">
-                          Registrado Por
+                        <a href="#" class="text-muted sort" data-sort="almacen">
+                          Almacén
                         </a>
                       </th>
                       @endrole
                       <th>
                         <a href="#" class="text-muted sort" data-sort="orders-date">
-                          Fijo
+                          Monto
                         </a>
                       </th>
                       <th>
                         <a href="#" class="text-muted sort" data-sort="orders-total">
-                          Celular
+                          Fecha
                         </a>
                       </th>
                       <th>
                         <a href="#" class="text-muted sort" data-sort="orders-status">
-                          Dirección
+                          Saldo
                         </a>
                       </th>
                       <th colspan="2">
                         <a href="#" class="text-muted sort" data-sort="orders-method">
-                          Créditos Activos
+                          Estatus
                         </a>
                       </th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody class="list">
-                  	@foreach($users as $user)
+                  	@foreach($cuotas as $cuota)
                     <tr>
-                      <!--<td>
-                        <div class="custom-control custom-checkbox table-checkbox">
-                          <input type="checkbox" class="custom-control-input" name="ordersSelect" id="ordersSelect{{$user->id}}">
-                          <label class="custom-control-label" for="ordersSelect{{$user->id}}">
-                            &nbsp;
-                          </label>
-                        </div>
-                      </td>-->
+                      
+                      <td class="orders-id">
+                        {{ $cuota->credito->id }}
+                      </td>
                       <td class="orders-order">
-                        {{ title_case($user->primer_nombre) }} {{ title_case($user->primer_apellido) }}
+                        {{ title_case($cuota->credito->user->primer_nombre) }} {{ title_case($cuota->credito->user->primer_apellido) }}
                       </td>
                       <td class="orders-product">
-                        {{ $user->email }}
+                        {{ $cuota->credito->user->email }}
                       </td>
+
                       @role('admin|agente|dev')
-                      <td class="orders-registrado">
-                        @if($user->registradoPor != null)
-                          @if($user->registradoPor->nombre_almacen != null)
-                          {{ $user->registradoPor->nombre_almacen }}
-                          @else
-                          {{ title_case($user->registradoPor->primer_nombre) }} {{ title_case($user->registradoPor->primer_apellido) }}
-                          @endif
-                        @endif
+                      <td class="orders-product">
+                        {{ ($cuota->credito->almacen)? $cuota->credito->almacen->nombre_almacen : 'No Suministrado' }}
                       </td>
                       @endrole
+
                       <td class="orders-date">
-                        {{ $user->telefono_fijo }}
+                        <strong>${{ $cuota->monto }}</strong>
                       </td>
                       <td class="orders-total">
-                        {{ $user->telefono_celular }}
+                        {{ date( 'd/m' , strtotime($cuota->fecha_pago)) }}
                       </td>
                       <td class="orders-status">
-                      	{{ $user->direccion }}, {{ $user->ciudad }}
+                      	{{ $cuota->saldo }}
                         <!--<div class="badge badge-soft-success">
                           Shipped
                         </div>-->
                       </td>
                       <td class="orders-method">
-                        {{ $user->creditos->count() }}
+                        {!! $cuota->estatusPago($cuota->estatus) !!}
                       </td>
                       <td class="text-right">
                         <div class="dropdown">
@@ -167,9 +154,19 @@
                             <i class="fe fe-more-vertical"></i>
                           </a>
                           <div class="dropdown-menu dropdown-menu-right">
-                            <a href="{{ route('admin.modificar.usuario' , [$user->id]) }}" class="dropdown-item">
-                              Modificar
+                            @role('admin|agente|dev')
+                            <a href="{{ route('admin.marcar.cobro.pago' , [$cuota->id]) }}" class="dropdown-item">
+                              Marcar como Pago
                             </a>
+                            
+                            <a href="{{ route('admin.ver.credito' , [$cuota->credito->id]) }}" class="dropdown-item">
+                              Ver Crédito
+                            </a>
+                            <a href="{{ route('admin.modificar.usuario' , [$cuota->credito->user->id]) }}" class="dropdown-item">
+                              Ver Usuario
+                            </a>
+                            @endrole
+                            
                           </div>
                         </div>
                       </td>

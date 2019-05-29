@@ -47,6 +47,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 		Route::get('/aprobar/credito/{id}', 'AdminController@aprobarCredito')->name('admin.aprobar.credito');
 		Route::get('/negar/credito/{id}', 'AdminController@negarCredito')->name('admin.negar.credito');
 
+		Route::get('/cobros', 'AdminController@cobros')->name('admin.ver.cobros');
+		Route::get('/marcar/{id}/cobro', 'AdminController@marcarCuotaPaga')->name('admin.marcar.cobro.pago');
+
 		Route::get('/enviar/mensaje', 'AdminController@enviarMensaje')->name('admin.enviar.mensaje');
 		Route::post('/enviar/nuevo/mensaje', 'AdminController@enviarNuevoMensaje')->name('admin.enviar.nuevo.mensaje');
 

@@ -40,6 +40,34 @@ class User extends Authenticatable
         'ciudad',
         'barrio',
         'direccion',
+        'referencia_ocupacion',
+        'referencia_ingresos',
+        'referencia_nombre_empresa',
+        'referencia_telefono_empresa',
+        'referencia_extension_empresa',
+        'referencia_direccion_empresa',
+        'referencia_sucursal_empresa',
+        'referencia_telefono_sucursal_empresa',
+        'referencia_cargo_empresa',
+        'referencia_tiempo_empresa',
+        'referencia_personal1_primer_nombre',
+        'referencia_personal1_segundo_nombre',
+        'referencia_personal1_primer_apellido',
+        'referencia_personal1_segundo_apellido',
+        'referencia_personal1_direccion',
+        'referencia_personal1_telefono_casa',
+        'referencia_personal1_telefono_celular',
+        'referencia_personal1_parentesco',
+        'referencia_personal1_telefono_laboral',
+        'referencia_personal2_primer_nombre',
+        'referencia_personal2_segundo_nombre',
+        'referencia_personal2_primer_apellido',
+        'referencia_personal2_segundo_apellido',
+        'referencia_personal2_direccion',
+        'referencia_personal2_telefono_casa',
+        'referencia_personal2_telefono_celular',
+        'referencia_personal2_parentesco',
+        'referencia_personal2_telefono_laboral',
         'registro_id',
         'validado_id',
         'email', 
@@ -72,6 +100,7 @@ class User extends Authenticatable
     public function usuariosConCredito()
     {
         return $this->where('limite_credito' , '!=' , null)
+                    ->where('limite_credito' , '>' , 0)
                     ->where('validado_id' , '!=' , null)
                     ->get();
     }
@@ -79,6 +108,11 @@ class User extends Authenticatable
     public function creditos()
     {
         return $this->hasMany(Credito::class , 'user_id');
+    }
+
+    public function documentos()
+    {
+        return $this->hasMany(Documento::class , 'user_id');
     }
 
     public function mensajes()

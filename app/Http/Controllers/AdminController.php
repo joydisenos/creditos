@@ -9,6 +9,7 @@ use App\User;
 use App\Credito;
 use App\Cuota;
 use App\Mensaje;
+use App\Documento;
 use Carbon\Carbon;
 
 class AdminController extends Controller
@@ -68,11 +69,52 @@ class AdminController extends Controller
 		    'password' => 'required|min:6|confirmed|string'
 		]);
 
-		$datos = $request->except(['password_confirmation' , 'tipo_usuario']);
+        
+
+		$datos = $request->except(['password_confirmation' , 'tipo_usuario' , 'cedulaA' , 'cedulaR']);
 		$datos['password'] = Hash::make($request->password);
         $datos['registro_id'] = Auth::user()->id;
 
+
     	$user = User::create($datos);
+
+        if( $request->hasFile('foto') )
+        {
+            $rutaFoto = 'archivos/'. $user->id;
+            $foto = $request->file('foto');
+            $nombreFoto = $foto->getClientOriginalName();
+            $request->file('foto')->storeAs($rutaFoto, $nombreFoto, 'public');
+        }
+
+        if( $request->hasFile('cedulaA') )
+        {
+            $rutaCedulaA = 'archivos/'. $user->id;
+            $cedulaA = $request->file('cedulaA');
+            $nombreCedulaA = $cedulaA->getClientOriginalName();
+            $request->file('cedulaA')->storeAs($rutaCedulaA, $nombreCedulaA, 'public');
+
+            Documento::create([
+                                'user_id' => $user->id ,
+                                'nombre' => 'Cédula Anverso',
+                                'ruta' => $nombreCedulaA,
+                                'estatus' => 0
+                            ]);
+        }
+
+        if( $request->hasFile('cedulaR') )
+        {
+            $rutaCedulaR = 'archivos/'. $user->id;
+            $cedulaR = $request->file('cedulaR');
+            $nombreCedulaR = $cedulaR->getClientOriginalName();
+            $request->file('cedulaR')->storeAs($rutaCedulaR, $nombreCedulaR, 'public');
+
+            Documento::create([
+                                'user_id' => $user->id ,
+                                'nombre' => 'Cédula Reverso',
+                                'ruta' => $nombreCedulaR,
+                                'estatus' => 0
+                            ]);
+        }
 
         switch ($request->tipo_usuario) {
 
@@ -161,9 +203,13 @@ class AdminController extends Controller
         $cuotas = json_decode($request->cuotas_array);
 
         $datos = $request->except('cuotas_array');
-        $datos['admin_id'] = Auth::user()->id;
+        $datos['almacen_id'] = Auth::user()->id;
 
         $credito = Credito::create($datos);
+
+        $user = User::findOrFail($request->user_id);
+        $user->limite_credito = $user->limite_credito - $credito->monto;
+        $user->save();
 
         $date = Carbon::now();
 
@@ -234,6 +280,7 @@ class AdminController extends Controller
     {
         $credito = Credito::findOrFail($id);
         $credito->estatus = 1;
+        $credito->admin_id = Auth::user()->id();
         $credito->save();
 
         return redirect()->back()->with('status' , 'Crédito Aprobado');
@@ -243,8 +290,27 @@ class AdminController extends Controller
     {
         $credito = Credito::findOrFail($id);
         $credito->estatus = 2;
+        $credito->admin_id = Auth::user()->id();
         $credito->save();
 
         return redirect()->back()->with('status' , 'Crédito Negado');
+    }
+
+    public function cobros()
+    {
+        $cuotas = Cuota::where('estatus' , 0)
+                        ->whereMonth('fecha_pago' , '<=' , date('m'))
+                        ->get();
+
+        return view('dash.cobros' , compact('cuotas'));
+    }
+
+    public function marcarCuotaPaga($id)
+    {
+        $cuota = Cuota::findOrFail($id);
+        $cuota->estatus = 1;
+        $cuota->save();
+
+        return redirect()->back()->with('status' , 'Estatus Cambiado Correctamente');
     }
 }
